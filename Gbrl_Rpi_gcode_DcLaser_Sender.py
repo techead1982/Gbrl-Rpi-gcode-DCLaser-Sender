@@ -4,6 +4,7 @@ import time
 import sys
 #import argparse 
 from tkinter import *
+from tkinter.filedialog import *
 
 class LaserCom():
 	comPort = 'COM3'
@@ -15,8 +16,7 @@ class LaserCom():
 	charline = []
 	
 	def getFileInfo(self):
-		fd = filedialog
-		fileName = fd.askopenfilename()
+		fileName = askopenfilename()
 		#fileName = fd.askopenfilename(filetypes = (("G-code",".gcode"),("NC",".nc"),("All","*.*")))
 		return fileName
 	def setSerial(self,com,baud,tOut):
