@@ -5,8 +5,10 @@ from tkinter import *
 
 
 def getFile():
-    text1.insert(gcodeSender.getFileInfo())
-    print(gcodeSender.getFileInfo())
+    #print(gcodeSender.getFileInfo())
+    text1.insert(INSERT,gcodeSender.getFileInfo())
+
+
 
 root = Tk()
 root.geometry("800x480+100+100")
