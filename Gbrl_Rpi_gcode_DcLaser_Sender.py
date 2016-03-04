@@ -13,7 +13,7 @@ class LaserCom():
 	lineCount = 0
 	gcodeCount = 0
 	charline = []
-	def getFileInfo():
+	def getFileInfo(self):
 		print("HI")
 	def setSerial(com,baud,tOut):
 		comPort = com
