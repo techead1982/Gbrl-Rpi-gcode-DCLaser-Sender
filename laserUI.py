@@ -27,4 +27,5 @@ Ncstart.pack()
 Exit = Button(NavC, fg="green", bg="black",text="Exit", command=root.destroy)
 Exit.pack()
 #Exit.place(height=20, width=40, x=800, y=480)
+
 root.mainloop()
