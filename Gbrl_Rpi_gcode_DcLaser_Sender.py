@@ -16,7 +16,7 @@ class LaserCom():
 	
 	def getFileInfo(self):
 		fd = filedialog
-		fileName = fd.askopenfilename(filetypes = (("G-code",".gcode"),("NC",".nc"),("All","*.*")))
+		fileName = fd.askopenfilename() #filetypes) = (("G-code",".gcode"),("NC",".nc"),("All","*.*")))
 		return fileName
 	def setSerial(self,com,baud,tOut):
 		comPort = com
