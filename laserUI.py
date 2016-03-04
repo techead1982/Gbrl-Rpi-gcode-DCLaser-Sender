@@ -7,7 +7,8 @@ from tkinter import *
 def getFile():
     print(gcodeSender.getFileInfo())
     
-def Framedisable():
+#def hide():
+    #Userinfo.lower(Userinfo)
 
 
 root = Tk()
@@ -24,7 +25,7 @@ open = Button(NavC, text="Open",command = getFile)
 open.place(y=0, x=10)
 Ncsend = Button(NavC, text="Send", relief=RAISED, bg="blue")
 Ncsend.place(y=10, x=20)
-Ncstart = Button(Userinfo, text="Start", relief=SUNKEN, fg="black")
+Ncstart = Button(NavC, text="Start", relief=SUNKEN, fg="black",state="disable")
 Ncstart.place(y=20, x=30)
 Exit = Button(NavC, fg="green", bg="black",text="Exit", command=root.destroy)
 Exit.place(y=50, x=10)
