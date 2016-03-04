@@ -16,7 +16,7 @@ class LaserCom():
 	charline = []
 	
 	def getFileInfo(self):
-		fileName = askopenfilename()
+		fileName = askopenfilename(filetypes = (("G-code",".gcode"),("NC",".nc"),("All","*.*")))
 		#fileName = fd.askopenfilename(filetypes = (("G-code",".gcode"),("NC",".nc"),("All","*.*")))
 		return fileName
 	def setSerial(self,com,baud,tOut):
