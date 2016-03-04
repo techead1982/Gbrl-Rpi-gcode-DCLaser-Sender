@@ -5,7 +5,9 @@ from tkinter import *
 
 
 def getFile():
+    text1.insert(gcodeSender.getFileInfo())
     print(gcodeSender.getFileInfo())
+
     
 #def hide():
     #Userinfo.lower(Userinfo)
