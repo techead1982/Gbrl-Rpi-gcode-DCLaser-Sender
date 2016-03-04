@@ -6,15 +6,22 @@ from tkinter import *
 
 def getFile():
     #print(gcodeSender.getFileInfo())
-    Uitext1.insert(INSERT,gcodeSender.getFileInfo())
+	fileName = gcodeSender.getFileInfo()
+	print(fileName)
+    Uitext1.insert(INSERT,fileName)
+	
+def sendFile():
+	gcodeSender.streamFile(fileName,Uitext1)
 
 
+fileName = ''
+gcodeSender = Gbrl_Rpi_gcode_DcLaser_Sender.LaserCom()
 
 root = Tk()
 root.geometry("800x480+100+100")
 root.resizable(False,False)
 
-gcodeSender = Gbrl_Rpi_gcode_DcLaser_Sender.LaserCom()
+
 
 Userinfo = Frame(root, relief=RIDGE, width=700, height=120, bg="blue")
 Userinfo.place(y=0,x=100)
