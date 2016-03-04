@@ -2,10 +2,11 @@ import tkinter
 from tkinter.constants import *
 
 tk = tkinter.Tk()
-Main = tkinter.Frame(tk, relief=RIDGE, width=800, height=480)
+Main = tkinter.Frame(tk, relief=RIDGE, width=100, height=300)
 Main.pack()
-open =tkinter.Button(tk,text="open", relief=SUNKEN command=tk.FileDialog)
-open.pack(side=RIGHT)
+open =tkinter.Button(tk,text="open", relief=SUNKEN,width=100, height=200)
+#open.pack()
+open.place(x=500,y=500)
 
 
 #Nav = tkinter.Frame(tk, relief=SUNKEN, Main width=200, height=200)
