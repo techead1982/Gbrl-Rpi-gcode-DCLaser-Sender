@@ -33,6 +33,7 @@ Exit = Button(NavC, fg="green", bg="black",text="Exit", command=root.destroy)
 Exit.place(y=50, x=10)
 text1 = Text(Send, width=700, height=300, bg="yellow")
 text1.place(y=0, x=0)
+
 #Exit.place(height=20, width=40, x=800, y=480)
 
 root.mainloop()
