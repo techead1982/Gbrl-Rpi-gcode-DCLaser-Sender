@@ -31,6 +31,6 @@ Exit.place(y=460, x=0)
 text1 = Text(Send, width=700, height=300, bg="yellow")
 text1.place(y=0, x=0)
 
-#Exit.place(height=20, width=40, x=800, y=480)
+
 
 root.mainloop()
