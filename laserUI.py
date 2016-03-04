@@ -5,8 +5,8 @@ from tkinter import *
 
 
 def getFile():
-    print("123")
-    gcodeSender.getFileInfo()
+    print(gcodeSender.getFileInfo())
+    
 root = Tk()
 gcodeSender = Gbrl_Rpi_gcode_DcLaser_Sender.LaserCom()
 
