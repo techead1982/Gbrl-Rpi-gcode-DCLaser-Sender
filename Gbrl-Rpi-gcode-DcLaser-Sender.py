@@ -7,3 +7,7 @@ import argparse
 
 class LaserCom:
 	
+	s = serial.Serial()
+	def setSerial
+	def streamFile(File):
+		f = open(File,'r')
