@@ -6,7 +6,7 @@ from tkinter import *
 
 def getFile():
     #print(gcodeSender.getFileInfo())
-    Userinfo.insert(INSERT,gcodeSender.getFileInfo())
+    Uitext1.insert(INSERT,gcodeSender.getFileInfo())
 
 
 
@@ -31,7 +31,7 @@ Ncstart = Button(NavC, text="Start", relief=SUNKEN, fg="black")
 Ncstart.place(y=250, x=0)
 NcExit = Button(NavC, text="Exit",fg="green", width=5, height=5, command=root.destroy)
 NcExit.place(y=460, x=0)
-Uitext1 = Text(Userinfo, width=70, height=30, bg="yellow")
+Uitext1 = Text(Userinfo, width=70, height=30, bg="gray")
 Uitext1.place(y=0, x=0)
 
 
