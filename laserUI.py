@@ -5,6 +5,7 @@ from tkinter import *
 
 fileName = ''
 def getFile():
+	global fileName
     #print(gcodeSender.getFileInfo())
 	fileName = gcodeSender.getFileInfo()+'\n'
 	print(fileName)
@@ -12,7 +13,7 @@ def getFile():
 	
 def sendFile():
 	#gcodeSender.setSerial('COM3',115200,1)
-	gcodeSender.streamFile(fileName,Uitext1,'COM3',115200)
+	gcodeSender.streamFile(fileName,Uitext1,'COM5',115200)
 
 gcodeSender = Gbrl_Rpi_gcode_DcLaser_Sender.LaserCom()
 
