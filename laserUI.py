@@ -7,7 +7,7 @@ fileName = ''
 def getFile():
 	global fileName
     #print(gcodeSender.getFileInfo())
-	fileName = gcodeSender.getFileInfo()+'\n'
+	fileName = gcodeSender.getFileInfo()
 	print(fileName)
 	Uitext1.insert(INSERT,fileName)
 	
