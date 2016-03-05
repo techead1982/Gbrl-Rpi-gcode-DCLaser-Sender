@@ -3,18 +3,16 @@ import Gbrl_Rpi_gcode_DcLaser_Sender
 
 from tkinter import *
 
-
+fileName = ''
 def getFile():
     #print(gcodeSender.getFileInfo())
-	fileName = gcodeSender.getFileInfo()
+	fileName = gcodeSender.getFileInfo()+'\n'
 	print(fileName)
-    Uitext1.insert(INSERT,fileName)
+	Uitext1.insert(INSERT,fileName)
 	
 def sendFile():
 	gcodeSender.streamFile(fileName,Uitext1)
 
-
-fileName = ''
 gcodeSender = Gbrl_Rpi_gcode_DcLaser_Sender.LaserCom()
 
 root = Tk()
