@@ -22,8 +22,6 @@ root.geometry("800x480+100+100")
 root.resizable(False,False)
 
 
-
-
 Userinfo = Frame(root, relief=RIDGE, width=700, height=120, bg="blue")
 Userinfo.place(y=0,x=100)
 NavC = Frame(root, relief=SUNKEN, width=100, height=480, bg="red")
@@ -43,6 +41,7 @@ Ncsetting = Button(NavC, text="Settings", width=11,height=5,relief=RAISED, bg="b
 Ncsetting.place(y=300, x=0)
 Uitext1 = Text(Userinfo, width=70, height=30, wrap ="word",bg="gray")
 Uitext1.place(y=0, x=0)
+
 
 
 
