@@ -31,9 +31,9 @@ class LaserCom():
 		comPort = com
 		baudRate = baud
 		timeOut = tOut
-	def streamFile(self,File,textBox):
+	def streamFile(self,File,textBox,comPort1,baudRate1):
 		print("i Work For now L35")
-		s = serial.Serial(self,comPort,baudRate,timeOut)
+		s = serial.Serial(comPort1,baudRate1)
 		s.write("\r\n\r\n")
 		time.sleep(2)
 		s.flushInput()
@@ -47,7 +47,7 @@ class LaserCom():
 				while sum(charline) >= grblBufferSize - 1 |  s.inWaiting() :
 					out_temp = s.readline().strip()
 					if out_temp.find('ok') < 0 and out_temp.find('error') < 0 :
-						textBox.insert(INSERT,"Debug:"+out_temp)
+						textBox.insert(INSERT,"Debug:"+out_temp+'\n')
 						
 		
 		

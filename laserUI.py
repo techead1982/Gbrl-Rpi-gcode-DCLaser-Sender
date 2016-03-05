@@ -11,7 +11,8 @@ def getFile():
 	Uitext1.insert(INSERT,fileName)
 	
 def sendFile():
-	gcodeSender.streamFile(fileName,Uitext1)
+	#gcodeSender.setSerial('COM3',115200,1)
+	gcodeSender.streamFile(fileName,Uitext1,'COM3',115200)
 
 gcodeSender = Gbrl_Rpi_gcode_DcLaser_Sender.LaserCom()
 
@@ -30,9 +31,9 @@ Send.place(y=120, x=100)
 
 Ncopen = Button(NavC, text="Open",width=10,height=10,command = getFile)
 Ncopen.place(y=5, x=0)
-Ncsend = Button(NavC, text="Send", relief=RAISED, bg="blue", height=10,)
+Ncsend = Button(NavC, text="Send", relief=RAISED, bg="blue", height=10)
 Ncsend.place(y=150, x=0)
-Ncstart = Button(NavC, text="Start", relief=SUNKEN, fg="black")
+Ncstart = Button(NavC, text="Start", relief=SUNKEN, fg="black",command = sendFile)
 Ncstart.place(y=250, x=0)
 NcExit = Button(NavC, text="Exit",fg="green", width=5, height=5, command=root.destroy)
 NcExit.place(y=460, x=0)
