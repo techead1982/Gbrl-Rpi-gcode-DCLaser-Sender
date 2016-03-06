@@ -1,7 +1,7 @@
 import Gbrl_Rpi_gcode_DcLaser_Sender
 
-
 from tkinter import *
+from tkinter import ttk
 
 fileName = ''
 def getFile():
