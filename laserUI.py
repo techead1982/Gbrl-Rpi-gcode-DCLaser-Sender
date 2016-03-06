@@ -39,7 +39,7 @@ NcExit = Button(NavC, text="Exit", width=11, height=5,fg="green", command=root.d
 NcExit.place(y=400, x=0)
 Ncsetting = Button(NavC, text="Settings", width=11,height=5,relief=RAISED, bg="blue")
 Ncsetting.place(y=300, x=0)
-Uitext1 = Text(Userinfo, width=70, height=30, wrap ="word",bg="gray")
+Uitext1 = Text(Userinfo, width=70, height=30, wrap ="word",bg="gray", ysroll=30)
 Uitext1.place(y=0, x=0)
 
 

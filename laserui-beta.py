@@ -40,8 +40,19 @@ Gatewaylbl.grid(row=3, column=0)
 Gateway = Entry(f4,width=16)
 Gateway.grid(row=3, column=1)
 
+dns1lbl = Label(f4, text ="Dns1", width=16)
+dns1lbl.grid(row=4, column=0)
+dns1 =Entry(f4, width=16)
+dns1.grid(row=4, column=1)
+
+dns2lbl = Label(f4, text="DNS2", width=16)
+dns2lbl.grid(row=6, column=0)
+dns2 = Entry(f4,width=16)
+dns2.grid(row=6, column=1)
+
+
 setnetwork=Button(f4,text="Set",width=16)
-setnetwork.grid(row=4, column=0,columnspan=2)
+setnetwork.grid(row=7, column=0,columnspan=2)
 
 
 portlbl = Label(f3, text ="Port", width=16)
