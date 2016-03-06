@@ -52,7 +52,8 @@ portcb.grid(row=0, column=1)
 
 baudratelbl=Label(f3, text ="Baudrate", width=16)
 baudratelbl.grid(row=2, column=0)
-baudrate =Spinbox(f3, values=('9600', '19200', '38400', '57600','115200'))
+baudrate =ttk.Combobox(f3)
+baudrate.config(values=('9600', '19200', '38400', '57600','115200'))
 baudrate.grid(row=2, column=1)
 
 databitslbl =Label(f3,text="Data Bits", width=16)
@@ -91,6 +92,16 @@ copytodir.grid(row=3,column=0)
 
 from_dir =Button(f2, text="From TO Remote Dir", width=16)
 from_dir.grid(row=3,column=1)
+
+Usernamelbl =Label(f2,text="Username", width=16)
+Usernamelbl.grid(row=4, column=0)
+Username =Entry(f2,width=16)
+Username.grid(row=4,column=1)
+
+Passwordlbl =Label(f2, text="Password", width=16)
+Passwordlbl.grid(row=5, column=0)
+Password =Entry(f2, width=16)
+Password.grid(row=5, column=1)
 
 
 
