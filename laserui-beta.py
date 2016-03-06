@@ -123,7 +123,9 @@ gbrlstatus =Label(f1,text="Connected", bg="green", fg="black",width=16)
 gbrlstatus.grid(row=0, column=2)
 
 gbrlhome = Button(f1,text="Home Laser", width=16)
-gbrlhome.grid(column=2, row=1)
+gbrlhome.grid(column=0, row=1)
+
+
 
 
 
