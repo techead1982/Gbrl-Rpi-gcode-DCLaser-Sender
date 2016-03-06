@@ -17,6 +17,21 @@ notebook.add(f2, text='Setting')
 notebook.add(f3, text='Serial')
 notebook.add(f4, text='Network')
 
+ipaddress = Label(f4,text="Ip Address")
+ipaddress.grid(row=0, column=0)
+ipaddrv4 =Entry(f4, width=16)
+ipaddrv4.grid(row=0, column=1)
+
+
+
+Subnetlbl = Label(f4,text="Subnet")
+Subnetlbl.grid(row=1, column=0)
+Subnet =Entry(f4, width=16)
+Subnet.grid(row=0, column=1)
+
+Gateway = Label(f4,text="Gateway")
+Gateway.grid(row=2, column=0)
+
 
 
 
