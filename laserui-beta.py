@@ -48,8 +48,19 @@ portcb.config(values=('1','2','3','4'))
 portcb.grid(row=0, column=1)
 baudratelbl=Label(f3, text ="Baudrate", width=16)
 baudratelbl.grid(row=2, column=0)
-baudrate =Spinbox(f3, values=('75', '110', '300', '1200', '2400', '4800', '9600', '19200', '38400', '57600','115200'))
+baudrate =Spinbox(f3, values=('9600', '19200', '38400', '57600','115200'))
 baudrate.grid(row=2, column=1)
+databitslbl =Label(f3,text="Data Bits", width=16)
+databitslbl.grid(row=3, column=0)
+databits = ttk.Combobox(f3)
+databits.config(values=('1','2','3','4','5','6','7','8','9','10'))
+databits.grid(row=3,column=1)
+Paritybitslbl =Label(f3, text="Paritybits")
+Paritybitslbl.grid(row=4,column=0)
+Paritybits = ttk.Combobox(f3)
+Paritybits.config(values=('none N', 'odd (O)', 'even (E)', 'mark (M)','space (S)'))
+Paritybits.grid(row=4,column=1)
+
 
 
 
