@@ -45,7 +45,7 @@ class LaserCom():
 		global lineCount
 		global gcodeCount
 		#print("i Work For now L35"+ File)
-		s = serial.Serial(comPort1,baudRate1,bytesize = serial.EIGHTBITS,parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE, timeout = 1)
+		s = serial.Serial(comPort1,baudRate1,bytesize = serial.EIGHTBITS,parity = serial.PARITY_NONE, stopbits = serial.STOPBITS_ONE)
 		s.write(bytearray('\r\n\r\n','ascii'))
 		time.sleep(2)
 		s.flushInput()
@@ -76,7 +76,7 @@ class LaserCom():
 					textBox.insert('1.0',"SND: " + str(lineCount) + " : " + lineBlock +'\n')
 					print( "SND: " + str(lineCount) + " : " + lineBlock,)
 					newl =b'\n'
-					s.write(bytearray(lineBlock+'\r','ascii')) # Send g-code block to grbl
+					s.write(bytearray(lineBlock+'\n','ascii')) # Send g-code block to grbl
 				if verbose : 
 					textBox.insert('1.0',"BUF:",str(sum(charline)),"REC:",grblOut+'\n')
 					print ("BUF:",str(sum(charline)),"REC:",grblOut)
