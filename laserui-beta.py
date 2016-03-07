@@ -20,7 +20,7 @@ notebook.add(f3, text='Serial')
 notebook.add(f4, text='Network')
 
 
-def network(self):
+def network(self,master):
     self.static = Radiobutton(f4, text="Static")
     self.static.grid(row=0, column=0)
 
