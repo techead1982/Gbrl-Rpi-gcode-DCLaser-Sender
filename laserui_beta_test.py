@@ -157,11 +157,6 @@ class gSenderAPP(threading.Thread):
 		self.root.update()
 		threading.Thread.__init__(self)
 		
-	 # def update(self):
-		 # self.root.update()
-
-
-
 		self.root.mainloop()
 		 
 if __name__=='__main__':
