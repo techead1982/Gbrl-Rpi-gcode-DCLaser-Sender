@@ -139,7 +139,16 @@ class gSenderAPP(threading.Thread):
 		self.gbrlhold.grid(row=2, column=0)
 		self.gbrlstart = Button(self.f1, text="Start Laser", width=16, bg="green")
 		self.gbrlstart.grid(row=2, column=1)
-		
+		self.gbrlup = Button(self.f1, text="+Z", width=16, bg="green")
+		self.gbrlup.grid(row=4, column=0, columnspan=2)
+		self.gbrlleft = Button(self.f1, text="-X", width=16, bg="green")
+		self.gbrlleft.grid(row=5, column=0)
+		self.gbrlright = Button(self.f1, text="+X", width=16, bg="green")
+		self.gbrlright.grid(row=5, column=1)
+		self.gbrldown = Button(self.f1, text="-Z", width=16, bg="green")
+		self.gbrldown.grid(row=6, column=0, columnspan=2)
+
+
 		#self.gbrltext = Text(self.f1,height=10,width=10,bg="gray")
 		#self.gbrltext.insert('1.0',self.s.get())
 		#self.gbrltext.grid(row=2,column=0,columnspan=1)
