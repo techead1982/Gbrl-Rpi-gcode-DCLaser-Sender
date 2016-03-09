@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 from Gbrl_Rpi_gcode_DcLaser_Sender import *
 from commands import *
+from threading import Thread
 
 
 class gSenderAPP(threading.Thread):
@@ -126,14 +127,22 @@ class gSenderAPP(threading.Thread):
 		self.gbrllbl = Label(self.f1, text="Conntroler Status", width=16)
 		self.gbrllbl.grid(row=0, column=0)
 		self.gbrlstatus = Label(self.f1, text="Connected", bg="green", fg="black", width=16)
-		self.gbrlstatus.grid(row=0, column=2)
+		self.gbrlstatus.grid(row=0, column=1)
 
-		self.gbrlhome = Button(self.f1, text="Home Laser", width=16, command=hi)
-		self.gbrlhome.grid(column=0, row=1)
+		self.gbrlhome = Button(self.f1, text="Home Laser", width=16, command=hi, bg="blue")
+		self.gbrlhome.grid(row=1,column=0)
+		self.gbrlstop = Button(self.f1, text="Stop Laser", width=16, bg="red")
+		self.gbrlstop.grid(row=1, column=1)
+		self.gbrlend = Button(self.f1, text="End Program", width=16, bg="green")
+		self.gbrlend.grid(row=1, column=2)
+		self.gbrlhold = Button(self.f1, text="Hold Laser", width=16, bg="green")
+		self.gbrlhold.grid(row=2, column=0)
+		self.gbrlstart = Button(self.f1, text="Start Laser", width=16, bg="green")
+		self.gbrlstart.grid(row=2, column=1)
 		
-		self.gbrltext = Text(self.f1,height=40,width=32,bg="gray")
-		self.gbrltext.insert('1.0',self.s.get())
-		self.gbrltext.grid(column=0, row=2,columnspan=3)
+		#self.gbrltext = Text(self.f1,height=10,width=10,bg="gray")
+		#self.gbrltext.insert('1.0',self.s.get())
+		#self.gbrltext.grid(row=2,column=0,columnspan=1)
 		
 		self.root.update()
 		threading.Thread.__init__(self)
@@ -143,11 +152,11 @@ class gSenderAPP(threading.Thread):
 
 
 
-
+		self.root.mainloop()
 		 
 if __name__=='__main__':
 	app = gSenderAPP()
 	app.start()
-
+	#root.mainloop()
 
 # root.mainloop()
