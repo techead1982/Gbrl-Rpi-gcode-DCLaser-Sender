@@ -128,7 +128,7 @@ class gSenderAPP(threading.Thread):
 		self.gbrlstatus = Label(self.f1, text="Connected", bg="green", fg="black", width=16)
 		self.gbrlstatus.grid(row=0, column=1)
 
-		self.gbrlhome = Button(self.f1, text="Home Laser", width=16, command=hi, bg="blue")
+		self.gbrlhome = Button(self.f1, text="Home Laser", width=16, height=30,expand=True, command=hi, bg="blue")
 		self.gbrlhome.grid(row=1,column=0)
 		self.gbrlstop = Button(self.f1, text="Stop Laser", width=16, bg="red")
 		self.gbrlstop.grid(row=1, column=1)
