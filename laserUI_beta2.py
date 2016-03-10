@@ -35,8 +35,8 @@ class GeneralPage(tk.Frame):
 	
 	def __init__(self,parent,controller):
 		
-		tk.Frame.__init__(self,parent)# main Frame with nav buttons
-		
+		tk.Frame.__init__(self,parent)
+		# main Frame with nav buttons //start
 		
 		generalPagebutt = ttk.Button(self,text = "General",command = lambda:controller.show_frame(GeneralPage))
 		generalPagebutt.grid(row=0,column =0)
@@ -50,17 +50,16 @@ class GeneralPage(tk.Frame):
 		NetworkPagebutt = ttk.Button(self,text = "Network",command = lambda:controller.show_frame(NetworkPage))
 		NetworkPagebutt.grid(row=0,column =3)
 		
-		GeneralControllsframe = ttk.Frame(self)# secondary frame with page controlls
+		# main Frame with nav buttons //End
+		# secondary frame with page controlls //Start
+		
+		GeneralControllsframe = ttk.Frame(self)
 		GeneralControllsframe.grid(row=1,column=0)
 		
 		testbut = ttk.Button(GeneralControllsframe,text="1")
 		testbut.grid(row=0,column =0)
-		# testPagebutt = ttk.Button(GeneralControllsframe,text = "Network")
-		# testPagebutt.grid(row=0,column =0)
 		
-		# testPagebutt = ttk.Button(GeneralControllsframe,text = "Network")
-		# testPagebutt.grid(row=0,column =1)
-		
+		# secondary frame with page controlls //End
 		
 class FileSYSPage(tk.Frame):
 	
