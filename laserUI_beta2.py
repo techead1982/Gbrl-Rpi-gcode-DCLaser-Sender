@@ -37,6 +37,7 @@ class GeneralPage(tk.Frame):
 		
 		tk.Frame.__init__(self,parent)
 		
+		
 		generalPagebutt = ttk.Button(self,text = "General")
 		generalPagebutt.grid(row=0,column =0)
 		
@@ -46,8 +47,18 @@ class GeneralPage(tk.Frame):
 		SerialPagebutt = ttk.Button(self,text = "Serial")
 		SerialPagebutt.grid(row=0,column =2)
 		
-		NetworkPagebutt = ttk.Button(self,text = "Network")
+		NetworkPagebutt = ttk.Button(self,text = "Network",command = lambda:controller.show_frame(NetworkPage))
 		NetworkPagebutt.grid(row=0,column =3)
+		
+		tframe = ttk.Frame(self)
+		tframe.grid(row=1,column=0)
+		
+		testPagebutt = ttk.Button(tframe,text = "Network")
+		testPagebutt.grid(row=0,column =0)
+		
+		testPagebutt = ttk.Button(tframe,text = "Network")
+		testPagebutt.grid(row=0,column =1)
+		
 		
 class FileSYSPage(tk.Frame):
 	
@@ -91,7 +102,7 @@ class NetworkPage(tk.Frame):
 		
 		tk.Frame.__init__(self,parent)
 		
-		generalPagebutt = ttk.Button(self,text = "General")
+		generalPagebutt = ttk.Button(self,text = "General",command = lambda:controller.show_frame(GeneralPage))
 		generalPagebutt.grid(row=0,column =0)
 		
 		filesysPagebutt = ttk.Button(self,text = "File System")
