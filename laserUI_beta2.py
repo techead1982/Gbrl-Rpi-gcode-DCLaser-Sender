@@ -82,8 +82,40 @@ class FileSYSPage(tk.Frame):
 		GeneralControllsframe = ttk.Frame(self)# secondary frame with page controlls
 		GeneralControllsframe.grid(row=1,column=0)
 		
-		testbut = ttk.Button(GeneralControllsframe,text="2")
-		testbut.grid(row=0,column =0)
+		homedirlbl = ttk.Label(GeneralControllsframe, text="Home Dir", width=16)
+		homedirlbl.grid(row=0, column=0)
+		homedir = ttk.Entry(GeneralControllsframe, width=16)
+		homedir.grid(row=0, column=1)
+
+		remotedirlbl = ttk.Label(GeneralControllsframe, text="Remote Dir", width=16)
+		remotedirlbl.grid(row=2, column=0)
+		remotedir = ttk.Entry(GeneralControllsframe, width=16)
+		remotedir.grid(row=2, column=1)
+
+		copytodir = ttk.Button(GeneralControllsframe, text="Copy TO Remote Dir", width=16)
+		copytodir.grid(row=3, column=0)
+
+		from_dir = ttk.Button(GeneralControllsframe, text="From TO Remote Dir", width=16)
+		from_dir.grid(row=3, column=1)
+
+		Usernamelbl = ttk.Label(GeneralControllsframe, text="Username", width=16)
+		Usernamelbl.grid(row=4, column=0)
+		Username = ttk.Entry(GeneralControllsframe, width=16)
+		Username.grid(row=4, column=1)
+
+		Passwordlbl = ttk.Label(GeneralControllsframe, text="Password", width=16)
+		Passwordlbl.grid(row=5, column=0)
+		Password = tk.Entry(GeneralControllsframe, width=16)
+		Password.grid(row=5, column=1)
+
+		setfilesys = ttk.Button(GeneralControllsframe, text="Set", width=16)
+		setfilesys.grid(row=6, column=0, columnspan=2)
+
+
+
+
+		#testbut = ttk.Button(GeneralControllsframe,text="2")
+		#testbut.grid(row=0,column =0)
 		
 class SerialPage(tk.Frame):
 	
@@ -116,7 +148,7 @@ class SerialPage(tk.Frame):
 		baudratelbl.grid(row=2, column=0)
 		baudrate = ttk.Combobox(GeneralControllsframe)
 		baudrate.config(values=('9600', '19200', '38400', '57600', '115200'))
-		baudrate.grid(row=2, column=1)
+        #baudrate.grid(row=2, column=1)
 
 		databitslbl = ttk.Label(GeneralControllsframe, text="Data Bits", width=16)
 		databitslbl.grid(row=3, column=0)
