@@ -1,5 +1,8 @@
+import sys
+import glob
 import tkinter as tk
 from tkinter import ttk
+import serial as s
 
 
 class NobleLaser(tk.Tk):  # V0.0.1
@@ -249,7 +252,56 @@ class NetworkPage(tk.Frame):
 
     # testbut = ttk.Button(GeneralControllsframe,text="4")
     # testbut.grid(row=0,column =0)
+	
+	
+class SerialStuff():
+	def __init__(self):
+		self.ser = serial.Serial()
+	def serial_ports():
+		if sys.platform.startswith('win'):
+			ports = ['COM%s'%(i+1)for i in range(256)]
+		elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+			ports = glob.glob('/dev/tty[A-Za-z]*')
+		elif sys.platform.startswith('darwin'):
+			ports = glob.glob('/dev/tty.*')
+		else:
+			raise EnvironmentError('Unsupported platform')
+		result = []
+		for port in ports:
+			try:
+				s = serial.Serial(port)
+				s.close()
+				result.append(port)
+			except (OSError, serial.SerialException):
+				pass
+		return result
+	def serial_Setup(self,ComPort,BaudRate):
+		self.ser.port = ComPort
+		self.ser.baudrate = BaudRate
+	def serial_Setup(self,ComPort,BaudRate,ByteSize):
+		self.ser.port = ComPort
+		self.ser.baudrate = BaudRate
+		self.ser.bytesize = ByteSize
+	def serial_Setup(self,ComPort,BaudRate,ByteSize,ParityBits):
+		self.ser.port = ComPort
+		self.ser.baudrate = BaudRate
+		self.ser.bytesize = ByteSize
+		self.ser.parity = ParityBits
+	def serial_Setup(self,ComPort,BaudRate,ByteSize,ParityBits,StopBits):
+		self.ser.port = ComPort
+		self.ser.baudrate = BaudRate
+		self.ser.bytesize = ByteSize
+		self.ser.parity = ParityBits
+		self.ser.stopbits = StopBits
+	def Stored_serial_Setup(self):
+		with open('SerialConfig.py','r',encoding='ascii') as f:
+	def Auto_Find_Grbl(self):
+		s=''
+			
 
+class NetworkShit():
+	def __init__():
 
 app = NobleLaser()
+
 app.mainloop()
