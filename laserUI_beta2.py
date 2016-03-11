@@ -81,7 +81,7 @@ class FileSYSPage(tk.Frame):
 		
 		GeneralControllsframe = ttk.Frame(self)# secondary frame with page controlls
 		GeneralControllsframe.grid(row=1,column=0)
-
+		
 		homedirlbl = ttk.Label(GeneralControllsframe, text="Home Dir", width=16)
 		homedirlbl.grid(row=0, column=0)
 		homedir = ttk.Entry(GeneralControllsframe, width=16)
@@ -105,11 +105,14 @@ class FileSYSPage(tk.Frame):
 
 		Passwordlbl = ttk.Label(GeneralControllsframe, text="Password", width=16)
 		Passwordlbl.grid(row=5, column=0)
-		Password = ttk.Entry(GeneralControllsframe, width=16)
+		Password = tk.Entry(GeneralControllsframe, width=16)
 		Password.grid(row=5, column=1)
 
 		setfilesys = ttk.Button(GeneralControllsframe, text="Set", width=16)
 		setfilesys.grid(row=6, column=0, columnspan=2)
+
+
+
 
 		#testbut = ttk.Button(GeneralControllsframe,text="2")
 		#testbut.grid(row=0,column =0)
@@ -135,8 +138,42 @@ class SerialPage(tk.Frame):
 		GeneralControllsframe = ttk.Frame(self)# secondary frame with page controlls
 		GeneralControllsframe.grid(row=1,column=0)
 		
-		testbut = ttk.Button(GeneralControllsframe,text="3")
-		testbut.grid(row=0,column =0)
+		portlbl = ttk.Label(GeneralControllsframe, text="Port", width=16)
+		portlbl.grid(row=0, column=0)
+		portcb = ttk.Combobox(GeneralControllsframe)
+		portcb.config(values=('1', '2', '3', '4'))
+		portcb.grid(row=0, column=1)
+
+		baudratelbl = ttk.Label(GeneralControllsframe, text="Baudrate", width=16)
+		baudratelbl.grid(row=2, column=0)
+		baudrate = ttk.Combobox(GeneralControllsframe)
+		baudrate.config(values=('9600', '19200', '38400', '57600', '115200'))
+        #baudrate.grid(row=2, column=1)
+
+		databitslbl = ttk.Label(GeneralControllsframe, text="Data Bits", width=16)
+		databitslbl.grid(row=3, column=0)
+		databits = ttk.Combobox(GeneralControllsframe)
+		databits.config(values=('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
+		databits.grid(row=3, column=1)
+
+		Paritybitslbl = ttk.Label(GeneralControllsframe, text="Paritybits", width=16)
+		Paritybitslbl.grid(row=4, column=0)
+		Paritybits = ttk.Combobox(GeneralControllsframe)
+		Paritybits.config(values=('none N', 'odd (O)', 'even (E)', 'mark (M)', 'space (S)'))
+		Paritybits.grid(row=4, column=1)
+
+		stopbitslbl = ttk.Label(GeneralControllsframe, text="Stopbits", width=16)
+		stopbitslbl.grid(row=5, column=0)
+		stopbits = ttk.Combobox(GeneralControllsframe)
+		stopbits.config(values=('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
+		stopbits.grid(row=5, column=1)
+
+		setserial = ttk.Button(GeneralControllsframe, text="Set", width=16)
+		setserial.grid(row=6, column=0, columnspan=2)
+
+
+		#testbut = ttk.Button(GeneralControllsframe,text="3")
+		#testbut.grid(row=0,column =0)
 		
 class NetworkPage(tk.Frame):
 	

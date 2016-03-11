@@ -1,4 +1,5 @@
 import threading
+from queue import Queue
 from tkinter import ttk
 
 from Gbrl_Rpi_gcode_DcLaser_Sender import *
