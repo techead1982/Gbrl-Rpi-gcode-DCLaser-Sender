@@ -54,8 +54,34 @@ class GeneralPage(tk.Frame):
         GeneralControllsframe = ttk.Frame(self)
         GeneralControllsframe.grid(row=1, column=0)
 
-        testbut = ttk.Button(GeneralControllsframe, text="1")
-        testbut.grid(row=0, column=0)
+        gbrllbl = ttk.Label(GeneralControllsframe, text="Controller Status", width=16)
+        gbrllbl.grid(row=0, column=0)
+        gbrlstatus = ttk.Label(GeneralControllsframe, width=16, text="Connected")
+        gbrlstatus.grid(row=0, column=1)
+
+        gbrlhome = ttk.Button(GeneralControllsframe, text="Home Laser", width=16)
+        gbrlhome.grid(row=1,column=0)
+        gbrlstop = ttk.Button(GeneralControllsframe, text="Stop Laser", width=16)
+        gbrlstop.grid(row=1, column=1)
+        gbrlend = ttk.Button(GeneralControllsframe, text="End Program", width=16)
+        gbrlend.grid(row=1, column=2)
+        gbrlhold = ttk.Button(GeneralControllsframe, text="Hold Laser", width=16)
+        gbrlhold.grid(row=2, column=0)
+        gbrlstart = ttk.Button(GeneralControllsframe, text="Start Laser", width=16)
+        gbrlstart.grid(row=2, column=1)
+        gbrlup = ttk.Button(GeneralControllsframe, text="+Z", width=16)
+        gbrlup.grid(row=4, column=0, columnspan=2)
+        gbrlleft = ttk.Button(GeneralControllsframe, text="-X", width=16)
+        gbrlleft.grid(row=5, column=0)
+        gbrlright = ttk.Button(GeneralControllsframe, text="+X", width=16)
+        gbrlright.grid(row=5, column=1)
+        gbrldown = ttk.Button(GeneralControllsframe, text="-Z", width=16)
+        gbrldown.grid(row=6, column=0, columnspan=2)
+        gbrldown = ttk.Button(GeneralControllsframe, text="Load Program", width=16)
+        gbrldown.grid(row=5, column=2, )
+
+        #testbut = ttk.Button(GeneralControllsframe, text="1")
+        #testbut.grid(row=0, column=0)
 
     # secondary frame with page controlls //End
 
