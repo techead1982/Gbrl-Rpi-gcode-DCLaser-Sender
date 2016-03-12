@@ -35,78 +35,82 @@ class NobleLaser(tk.Tk):  # V0.0.1
 
 
 class GeneralPage(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        # main Frame with nav buttons //start
+	def __init__(self, parent, controller):
+		tk.Frame.__init__(self, parent)
+		# main Frame with nav buttons //start
 
-        generalPagebutt = ttk.Button(self, text="General", command=lambda: controller.show_frame(GeneralPage))
-        generalPagebutt.grid(row=0, column=0)
+		generalPagebutt = tk.Button(self, text="General",width=10,height=2,bg = 'gray',command=lambda: controller.show_frame(GeneralPage))
+		#generalPagebutt.place(y=0, x=0)
+		generalPagebutt.grid(row=0, column=0)
 
-        filesysPagebutt = ttk.Button(self, text="File System", command=lambda: controller.show_frame(FileSYSPage))
-        filesysPagebutt.grid(row=0, column=1)
+		filesysPagebutt = tk.Button(self, text="File System",width=10,height=2, command=lambda: controller.show_frame(FileSYSPage))
+		#filesysPagebutt.place(y=0, x=0)
+		filesysPagebutt.grid(row=0, column=1)
 
-        SerialPagebutt = ttk.Button(self, text="Serial", command=lambda: controller.show_frame(SerialPage))
-        SerialPagebutt.grid(row=0, column=2)
+		SerialPagebutt = tk.Button(self, text="Serial",width=10,height=2, command=lambda: controller.show_frame(SerialPage))
+		#SerialPagebutt.place(y=0, x=0)
+		SerialPagebutt.grid(row=0, column=2)
 
-        NetworkPagebutt = ttk.Button(self, text="Network", command=lambda: controller.show_frame(NetworkPage))
-        NetworkPagebutt.grid(row=0, column=3)
+		NetworkPagebutt = tk.Button(self, text="Network",width=10,height=2, command=lambda: controller.show_frame(NetworkPage))
+		#NetworkPagebutt.place(y=0, x=0)
+		NetworkPagebutt.grid(row=0, column=3)
 
-        # main Frame with nav buttons //End
-        # secondary frame with page controlls //Start
+		# main Frame with nav buttons //End
+		# secondary frame with page controlls //Start
 
-        GeneralControllsframe = ttk.Frame(self)
-        GeneralControllsframe.grid(row=1, column=0)
+		GeneralControllsframe = ttk.Frame(self)
+		GeneralControllsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
 
-        gbrllbl = ttk.Label(GeneralControllsframe, text="Controller Status", width=16)
-        gbrllbl.grid(row=0, column=0)
-        gbrlstatus = ttk.Label(GeneralControllsframe, width=16, text="Connected")
-        gbrlstatus.grid(row=0, column=1)
+		gbrllbl = ttk.Label(GeneralControllsframe, text="Controller Status", width=16)
+		gbrllbl.grid(row=0, column=0)
+		gbrlstatus = ttk.Label(GeneralControllsframe, width=16, text="Connected")
+		gbrlstatus.grid(row=0, column=1)
 
-        gbrlhome = ttk.Button(GeneralControllsframe, text="Home Laser", width=16)
-        gbrlhome.grid(row=1,column=0)
-        gbrlstop = ttk.Button(GeneralControllsframe, text="Stop Laser", width=16)
-        gbrlstop.grid(row=1, column=1)
-        gbrlend = ttk.Button(GeneralControllsframe, text="End Program", width=16)
-        gbrlend.grid(row=1, column=2)
-        gbrlhold = ttk.Button(GeneralControllsframe, text="Hold Laser", width=16)
-        gbrlhold.grid(row=2, column=0)
-        gbrlstart = ttk.Button(GeneralControllsframe, text="Start Laser", width=16)
-        gbrlstart.grid(row=2, column=1)
-        gbrlup = ttk.Button(GeneralControllsframe, text="+Z", width=16)
-        gbrlup.grid(row=4, column=0, columnspan=2)
-        gbrlleft = ttk.Button(GeneralControllsframe, text="-X", width=16)
-        gbrlleft.grid(row=5, column=0)
-        gbrlright = ttk.Button(GeneralControllsframe, text="+X", width=16)
-        gbrlright.grid(row=5, column=1)
-        gbrldown = ttk.Button(GeneralControllsframe, text="-Z", width=16)
-        gbrldown.grid(row=6, column=0, columnspan=2)
-        gbrldown = ttk.Button(GeneralControllsframe, text="Load Program", width=16)
-        gbrldown.grid(row=5, column=2, )
+		gbrlhome = ttk.Button(GeneralControllsframe, text="Home Laser", width=16)
+		gbrlhome.grid(row=1,column=0)
+		gbrlstop = ttk.Button(GeneralControllsframe, text="Stop Laser", width=16)
+		gbrlstop.grid(row=1, column=1)
+		gbrlend = ttk.Button(GeneralControllsframe, text="End Program", width=16)
+		gbrlend.grid(row=1, column=2)
+		gbrlhold = ttk.Button(GeneralControllsframe, text="Hold Laser", width=16)
+		gbrlhold.grid(row=2, column=0)
+		gbrlstart = ttk.Button(GeneralControllsframe, text="Start Laser", width=16)
+		gbrlstart.grid(row=2, column=1)
+		gbrlup = ttk.Button(GeneralControllsframe, text="+Z", width=16)
+		gbrlup.grid(row=4, column=0, columnspan=2)
+		gbrlleft = ttk.Button(GeneralControllsframe, text="-X", width=16)
+		gbrlleft.grid(row=5, column=0)
+		gbrlright = ttk.Button(GeneralControllsframe, text="+X", width=16)
+		gbrlright.grid(row=5, column=1)
+		gbrldown = ttk.Button(GeneralControllsframe, text="-Z", width=16)
+		gbrldown.grid(row=6, column=0, columnspan=2)
+		gbrldown = ttk.Button(GeneralControllsframe, text="Load Program", width=16)
+		gbrldown.grid(row=5, column=2, )
 
-        #testbut = ttk.Button(GeneralControllsframe, text="1")
-        #testbut.grid(row=0, column=0)
+		#testbut = ttk.Button(GeneralControllsframe, text="1")
+		#testbut.grid(row=0, column=0)
 
-    # secondary frame with page controlls //End
+	# secondary frame with page controlls //End
 
 
 class FileSYSPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        generalPagebutt = ttk.Button(self, text="General", command=lambda: controller.show_frame(GeneralPage))
+        generalPagebutt = tk.Button(self, text="General",width=10,height=2, command=lambda: controller.show_frame(GeneralPage))
         generalPagebutt.grid(row=0, column=0)
 
-        filesysPagebutt = ttk.Button(self, text="File System", command=lambda: controller.show_frame(FileSYSPage))
+        filesysPagebutt = tk.Button(self, text="File System",width=10,height=2,bg = 'gray', command=lambda: controller.show_frame(FileSYSPage))
         filesysPagebutt.grid(row=0, column=1)
 
-        SerialPagebutt = ttk.Button(self, text="Serial", command=lambda: controller.show_frame(SerialPage))
+        SerialPagebutt = tk.Button(self, text="Serial",width=10,height=2, command=lambda: controller.show_frame(SerialPage))
         SerialPagebutt.grid(row=0, column=2)
 
-        NetworkPagebutt = ttk.Button(self, text="Network", command=lambda: controller.show_frame(NetworkPage))
+        NetworkPagebutt = tk.Button(self, text="Network",width=10,height=2, command=lambda: controller.show_frame(NetworkPage))
         NetworkPagebutt.grid(row=0, column=3)
 
         GeneralControllsframe = ttk.Frame(self)  # secondary frame with page controlls
-        GeneralControllsframe.grid(row=1, column=0)
+        GeneralControllsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
 
         homedirlbl = ttk.Label(GeneralControllsframe, text="Home Dir", width=16)
         homedirlbl.grid(row=0, column=0)
@@ -145,20 +149,20 @@ class SerialPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        generalPagebutt = ttk.Button(self, text="General", command=lambda: controller.show_frame(GeneralPage))
+        generalPagebutt = tk.Button(self, text="General",width=10,height=2, command=lambda: controller.show_frame(GeneralPage))
         generalPagebutt.grid(row=0, column=0)
 
-        filesysPagebutt = ttk.Button(self, text="File System", command=lambda: controller.show_frame(FileSYSPage))
+        filesysPagebutt = tk.Button(self, text="File System",width=10,height=2, command=lambda: controller.show_frame(FileSYSPage))
         filesysPagebutt.grid(row=0, column=1)
 
-        SerialPagebutt = ttk.Button(self, text="Serial", command=lambda: controller.show_frame(SerialPage))
+        SerialPagebutt = tk.Button(self, text="Serial",width=10,height=2,bg = 'gray', command=lambda: controller.show_frame(SerialPage))
         SerialPagebutt.grid(row=0, column=2)
 
-        NetworkPagebutt = ttk.Button(self, text="Network", command=lambda: controller.show_frame(NetworkPage))
+        NetworkPagebutt = tk.Button(self, text="Network",width=10,height=2, command=lambda: controller.show_frame(NetworkPage))
         NetworkPagebutt.grid(row=0, column=3)
 
         GeneralControllsframe = ttk.Frame(self)  # secondary frame with page controlls
-        GeneralControllsframe.grid(row=1, column=0)
+        GeneralControllsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
 
         portlbl = ttk.Label(GeneralControllsframe, text="Port", width=16)
         portlbl.grid(row=0, column=0)
@@ -201,20 +205,20 @@ class NetworkPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        generalPagebutt = ttk.Button(self, text="General", command=lambda: controller.show_frame(GeneralPage))
+        generalPagebutt = tk.Button(self, text="General",width=10,height=2, command=lambda: controller.show_frame(GeneralPage))
         generalPagebutt.grid(row=0, column=0)
 
-        filesysPagebutt = ttk.Button(self, text="File System", command=lambda: controller.show_frame(FileSYSPage))
+        filesysPagebutt = tk.Button(self, text="File System",width=10,height=2, command=lambda: controller.show_frame(FileSYSPage))
         filesysPagebutt.grid(row=0, column=1)
 
-        SerialPagebutt = ttk.Button(self, text="Serial", command=lambda: controller.show_frame(SerialPage))
+        SerialPagebutt = tk.Button(self, text="Serial",width=10,height=2, command=lambda: controller.show_frame(SerialPage))
         SerialPagebutt.grid(row=0, column=2)
 
-        NetworkPagebutt = ttk.Button(self, text="Network", command=lambda: controller.show_frame(NetworkPage))
+        NetworkPagebutt = tk.Button(self, text="Network",width=10,height=2,bg = 'gray', command=lambda: controller.show_frame(NetworkPage))
         NetworkPagebutt.grid(row=0, column=3)
 
         GeneralControllsframe = ttk.Frame(self)  # secondary frame with page controlls
-        GeneralControllsframe.grid(row=1, column=0)
+        GeneralControllsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
 
         static = ttk.Radiobutton(GeneralControllsframe, text="Static")
         static.grid(row=0, column=1)
@@ -242,10 +246,10 @@ class NetworkPage(tk.Frame):
         dns1 = ttk.Entry(GeneralControllsframe, width=16)
         dns1.grid(row=4, column=1)
 
-        dns2lbl = ttk.Label(GeneralControllsframe, text="DNS2", width=16)
-        dns2lbl.grid(row=6, column=0)
+        dns2lbl = ttk.Label(GeneralControllsframe, text="Dns2", width=16)
+        dns2lbl.grid(row=5, column=0)
         dns2 = ttk.Entry(GeneralControllsframe, width=16)
-        dns2.grid(row=6, column=1)
+        dns2.grid(row=5, column=1)
 
         setnetwork = ttk.Button(GeneralControllsframe, text="Set", width=16)
         setnetwork.grid(row=7, column=0, columnspan=2)
@@ -278,29 +282,37 @@ class SerialStuff():
 	def serial_Setup(self,ComPort,BaudRate):
 		self.ser.port = ComPort
 		self.ser.baudrate = BaudRate
+		
 	def serial_Setup(self,ComPort,BaudRate,ByteSize):
 		self.ser.port = ComPort
 		self.ser.baudrate = BaudRate
 		self.ser.bytesize = ByteSize
+		
 	def serial_Setup(self,ComPort,BaudRate,ByteSize,ParityBits):
 		self.ser.port = ComPort
 		self.ser.baudrate = BaudRate
 		self.ser.bytesize = ByteSize
 		self.ser.parity = ParityBits
+		
 	def serial_Setup(self,ComPort,BaudRate,ByteSize,ParityBits,StopBits):
 		self.ser.port = ComPort
 		self.ser.baudrate = BaudRate
 		self.ser.bytesize = ByteSize
 		self.ser.parity = ParityBits
 		self.ser.stopbits = StopBits
-	def Stored_serial_Setup(self):
-		with open('SerialConfig.py','r',encoding='ascii') as f:
-	def Auto_Find_Grbl(self):
-		s=''
+		
+	#def Stored_serial_Setup(self):
+		#with open('SerialConfig.py','r',encoding='ascii') as f:
+			
+	#def Auto_Find_Grbl(self):
+		#s=''
+		#print(s)
 			
 
-class NetworkShit():
-	def __init__():
+#class NetworkShit():
+	#def __init__():
+		#s=''
+		#print(s)
 
 app = NobleLaser()
 
