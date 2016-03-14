@@ -1,0 +1,4 @@
+http://stackoverflow.com/questions/10574821/dynamically-updating-tkinter-window-based-on-serial-data
+http://stackoverflow.com/questions/665566/redirect-command-line-results-to-a-tkinter-gui
+search term google
+python tk serial reply
