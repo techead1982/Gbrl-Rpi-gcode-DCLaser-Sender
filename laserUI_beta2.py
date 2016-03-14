@@ -1,5 +1,7 @@
 import sys
+import socket
 import glob
+import serial
 import tkinter as tk
 from tkinter import ttk
 import serial as s
@@ -35,62 +37,62 @@ class NobleLaser(tk.Tk):  # V0.0.1
 
 
 class GeneralPage(tk.Frame):
-	def __init__(self, parent, controller):
-		tk.Frame.__init__(self, parent)
-		# main Frame with nav buttons //start
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        # main Frame with nav buttons //start
 
-		generalPagebutt = tk.Button(self, text="General",width=10,height=2,bg = 'gray',command=lambda: controller.show_frame(GeneralPage))
-		#generalPagebutt.place(y=0, x=0)
-		generalPagebutt.grid(row=0, column=0)
+        generalPagebutt = tk.Button(self, text="General",width=10,height=2,bg = 'gray',command=lambda: controller.show_frame(GeneralPage))
+        #generalPagebutt.place(y=0, x=0)
+        generalPagebutt.grid(row=0, column=0)
 
-		filesysPagebutt = tk.Button(self, text="File System",width=10,height=2, command=lambda: controller.show_frame(FileSYSPage))
-		#filesysPagebutt.place(y=0, x=0)
-		filesysPagebutt.grid(row=0, column=1)
+        filesysPagebutt = tk.Button(self, text="File System",width=10,height=2, command=lambda: controller.show_frame(FileSYSPage))
+        #filesysPagebutt.place(y=0, x=0)
+        filesysPagebutt.grid(row=0, column=1)
 
-		SerialPagebutt = tk.Button(self, text="Serial",width=10,height=2, command=lambda: controller.show_frame(SerialPage))
-		#SerialPagebutt.place(y=0, x=0)
-		SerialPagebutt.grid(row=0, column=2)
+        SerialPagebutt = tk.Button(self, text="Serial",width=10,height=2, command=lambda: controller.show_frame(SerialPage))
+        #SerialPagebutt.place(y=0, x=0)
+        SerialPagebutt.grid(row=0, column=2)
 
-		NetworkPagebutt = tk.Button(self, text="Network",width=10,height=2, command=lambda: controller.show_frame(NetworkPage))
-		#NetworkPagebutt.place(y=0, x=0)
-		NetworkPagebutt.grid(row=0, column=3)
+        NetworkPagebutt = tk.Button(self, text="Network",width=10,height=2, command=lambda: controller.show_frame(NetworkPage))
+        #NetworkPagebutt.place(y=0, x=0)
+        NetworkPagebutt.grid(row=0, column=3)
 
-		# main Frame with nav buttons //End
-		# secondary frame with page controlls //Start
+        # main Frame with nav buttons //End
+        # secondary frame with page controlls //Start
 
-		GeneralControllsframe = ttk.Frame(self)
-		GeneralControllsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
+        GeneralControllsframe = ttk.Frame(self)
+        GeneralControllsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
 
-		gbrllbl = ttk.Label(GeneralControllsframe, text="Controller Status", width=16)
-		gbrllbl.grid(row=0, column=0)
-		gbrlstatus = ttk.Label(GeneralControllsframe, width=16, text="Connected")
-		gbrlstatus.grid(row=0, column=1)
+        gbrllbl = ttk.Label(GeneralControllsframe, text="Controller Status", width=16)
+        gbrllbl.grid(row=0, column=0)
+        gbrlstatus = ttk.Label(GeneralControllsframe, width=16, text="Connected")
+        gbrlstatus.grid(row=0, column=1)
 
-		gbrlhome = ttk.Button(GeneralControllsframe, text="Home Laser", width=16)
-		gbrlhome.grid(row=1,column=0)
-		gbrlstop = ttk.Button(GeneralControllsframe, text="Stop Laser", width=16)
-		gbrlstop.grid(row=1, column=1)
-		gbrlend = ttk.Button(GeneralControllsframe, text="End Program", width=16)
-		gbrlend.grid(row=1, column=2)
-		gbrlhold = ttk.Button(GeneralControllsframe, text="Hold Laser", width=16)
-		gbrlhold.grid(row=2, column=0)
-		gbrlstart = ttk.Button(GeneralControllsframe, text="Start Laser", width=16)
-		gbrlstart.grid(row=2, column=1)
-		gbrlup = ttk.Button(GeneralControllsframe, text="+Z", width=16)
-		gbrlup.grid(row=4, column=0, columnspan=2)
-		gbrlleft = ttk.Button(GeneralControllsframe, text="-X", width=16)
-		gbrlleft.grid(row=5, column=0)
-		gbrlright = ttk.Button(GeneralControllsframe, text="+X", width=16)
-		gbrlright.grid(row=5, column=1)
-		gbrldown = ttk.Button(GeneralControllsframe, text="-Z", width=16)
-		gbrldown.grid(row=6, column=0, columnspan=2)
-		gbrldown = ttk.Button(GeneralControllsframe, text="Load Program", width=16)
-		gbrldown.grid(row=5, column=2, )
+        gbrlhome = ttk.Button(GeneralControllsframe, text="Home Laser", width=16)
+        gbrlhome.grid(row=1,column=0)
+        gbrlstop = ttk.Button(GeneralControllsframe, text="Stop Laser", width=16)
+        gbrlstop.grid(row=1, column=1)
+        gbrlend = ttk.Button(GeneralControllsframe, text="End Program", width=16)
+        gbrlend.grid(row=1, column=2)
+        gbrlhold = ttk.Button(GeneralControllsframe, text="Hold Laser", width=16)
+        gbrlhold.grid(row=2, column=0)
+        gbrlstart = ttk.Button(GeneralControllsframe, text="Start Laser", width=16)
+        gbrlstart.grid(row=2, column=1)
+        gbrlup = ttk.Button(GeneralControllsframe, text="+Z", width=16)
+        gbrlup.grid(row=4, column=0, columnspan=2)
+        gbrlleft = ttk.Button(GeneralControllsframe, text="-X", width=16)
+        gbrlleft.grid(row=5, column=0)
+        gbrlright = ttk.Button(GeneralControllsframe, text="+X", width=16)
+        gbrlright.grid(row=5, column=1)
+        gbrldown = ttk.Button(GeneralControllsframe, text="-Z", width=16)
+        gbrldown.grid(row=6, column=0, columnspan=2)
+        gbrldown = ttk.Button(GeneralControllsframe, text="Load Program", width=16)
+        gbrldown.grid(row=5, column=2, )
 
-		#testbut = ttk.Button(GeneralControllsframe, text="1")
-		#testbut.grid(row=0, column=0)
+        #testbut = ttk.Button(GeneralControllsframe, text="1")
+        #testbut.grid(row=0, column=0)
 
-	# secondary frame with page controlls //End
+        # secondary frame with page controlls //End
 
 
 class FileSYSPage(tk.Frame):
@@ -141,8 +143,8 @@ class FileSYSPage(tk.Frame):
         setfilesys = ttk.Button(GeneralControllsframe, text="Set", width=16)
         setfilesys.grid(row=6, column=0, columnspan=2)
 
-    # testbut = ttk.Button(GeneralControllsframe,text="2")
-    # testbut.grid(row=0,column =0)
+        # testbut = ttk.Button(GeneralControllsframe,text="2")
+        # testbut.grid(row=0,column =0)
 
 
 class SerialPage(tk.Frame):
@@ -197,8 +199,8 @@ class SerialPage(tk.Frame):
         setserial = ttk.Button(GeneralControllsframe, text="Set", width=16)
         setserial.grid(row=6, column=0, columnspan=2)
 
-    # testbut = ttk.Button(GeneralControllsframe,text="3")
-    # testbut.grid(row=0,column =0)
+        # testbut = ttk.Button(GeneralControllsframe,text="3")
+        # testbut.grid(row=0,column =0)
 
 
 class NetworkPage(tk.Frame):
@@ -241,12 +243,12 @@ class NetworkPage(tk.Frame):
         Gateway = ttk.Entry(GeneralControllsframe, width=16)
         Gateway.grid(row=3, column=1)
 
-        dns1lbl = ttk.Label(GeneralControllsframe, text="Dns1", width=16)
+        dns1lbl = ttk.Label(GeneralControllsframe, text="Dns1")
         dns1lbl.grid(row=4, column=0)
         dns1 = ttk.Entry(GeneralControllsframe, width=16)
         dns1.grid(row=4, column=1)
 
-        dns2lbl = ttk.Label(GeneralControllsframe, text="Dns2", width=16)
+        dns2lbl = ttk.Label(GeneralControllsframe, text="Dns2")
         dns2lbl.grid(row=5, column=0)
         dns2 = ttk.Entry(GeneralControllsframe, width=16)
         dns2.grid(row=5, column=1)
@@ -254,65 +256,81 @@ class NetworkPage(tk.Frame):
         setnetwork = ttk.Button(GeneralControllsframe, text="Set", width=16)
         setnetwork.grid(row=7, column=0, columnspan=2)
 
-    # testbut = ttk.Button(GeneralControllsframe,text="4")
-    # testbut.grid(row=0,column =0)
-	
-	
-class SerialStuff():
-	def __init__(self):
-		self.ser = serial.Serial()
-	def serial_ports():
-		if sys.platform.startswith('win'):
-			ports = ['COM%s'%(i+1)for i in range(256)]
-		elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
-			ports = glob.glob('/dev/tty[A-Za-z]*')
-		elif sys.platform.startswith('darwin'):
-			ports = glob.glob('/dev/tty.*')
-		else:
-			raise EnvironmentError('Unsupported platform')
-		result = []
-		for port in ports:
-			try:
-				s = serial.Serial(port)
-				s.close()
-				result.append(port)
-			except (OSError, serial.SerialException):
-				pass
-		return result
-	def serial_Setup(self,ComPort,BaudRate):
-		self.ser.port = ComPort
-		self.ser.baudrate = BaudRate
-		
-	def serial_Setup(self,ComPort,BaudRate,ByteSize):
-		self.ser.port = ComPort
-		self.ser.baudrate = BaudRate
-		self.ser.bytesize = ByteSize
-		
-	def serial_Setup(self,ComPort,BaudRate,ByteSize,ParityBits):
-		self.ser.port = ComPort
-		self.ser.baudrate = BaudRate
-		self.ser.bytesize = ByteSize
-		self.ser.parity = ParityBits
-		
-	def serial_Setup(self,ComPort,BaudRate,ByteSize,ParityBits,StopBits):
-		self.ser.port = ComPort
-		self.ser.baudrate = BaudRate
-		self.ser.bytesize = ByteSize
-		self.ser.parity = ParityBits
-		self.ser.stopbits = StopBits
-		
-	#def Stored_serial_Setup(self):
-		#with open('SerialConfig.py','r',encoding='ascii') as f:
-			
-	#def Auto_Find_Grbl(self):
-		#s=''
-		#print(s)
-			
+        # testbut = ttk.Button(GeneralControllsframe,text="4")
+        # testbut.grid(row=0,column =0)
 
-#class NetworkShit():
-	#def __init__():
-		#s=''
-		#print(s)
+
+class SerialStuff:
+
+    def __init__(self):
+
+        self.ser = serial.Serial()
+
+    def serial_ports(self):
+
+        if sys.platform.startswith('win'):
+            ports = ['COM%s' % (i+1)for i in range(256)]
+        elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+            ports = glob.glob('/dev/tty[A-Za-z]*')
+        elif sys.platform.startswith('darwin'):
+            ports = glob.glob('/dev/tty.*')
+        else:
+            raise EnvironmentError('Unsupported platform')
+        result = []
+        for port in ports:
+            try:
+                s1 = serial.Serial(self.ser.port, self.ser.baudrate)
+                s1.close()
+                result.append(port)
+            except (OSError, serial.SerialException):
+                pass
+        return result
+
+    def serial_setup(self, comport, baud_rate):
+
+        self.ser.Port = comport
+        self.ser.Baud_Rate = baud_rate
+
+    def serial_setup(self, comport, baud_rate, byte_size):
+
+        self.ser.Port = comport
+        self.ser.Baud_Rate = baud_rate
+        self.ser.Byte_Size = byte_size
+
+    def serial_setup(self, comport, baud_rate, byte_size, parity_bits):
+
+        self.ser.Port = comport
+        self.ser.Baud_Rate = baud_rate
+        self.ser.Byte_Size = byte_size
+        self.ser.Parity = parity_bits
+
+    def serial_setup(self, comport, baud_rate, byte_size, parity_bits, stop_bits):
+
+        self.ser.port = comport
+        self.ser.Baud_Rate = baud_rate
+        self.ser.Byte_Size = byte_size
+        self.ser.Parity = parity_bits
+        self.ser.Stop_Bits = stop_bits
+
+
+    #def Stored_serial_Setup(self):
+        #with open('SerialConfig.py','r',encoding='ascii') as f:
+
+    #def Auto_Find_Grbl(self):
+        #s=''
+        #print(s)
+
+
+class NetworkShit:
+    #def __init__(self):
+
+    def get_dhcp_info(self):
+        info = []
+        #ipadd = socket.fd
+        #print(ipadd)
+
+        return info
+    def staticip(self, ip_address, subnet_mask, gateway, dns1, dns2):
 
 app = NobleLaser()
 
