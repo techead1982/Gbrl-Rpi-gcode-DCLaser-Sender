@@ -4,16 +4,15 @@ import glob
 import time
 import serial
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, StringVar
 
 
 class NobleLaser(tk.Tk):  # V0.0.1
 
     def __init__(self, *args, **kwargs):
-        Ver = "V 0.0.1"
+        ver = "V 0.0.1"
         tk.Tk.__init__(self, *args, **kwargs)
-
-        tk.Tk.wm_title(self, "Noble Laser " + Ver + " --- " + ser111.grbl_version)
+        tk.Tk.wm_title(self, "Noble Laser " + ver + " --- " + ser111.grbl_version)
         tk.Tk.wm_geometry(self, "800x480+100+100")
         tk.Tk.wm_resizable(self, False, False)
         # tk.Tk.iconbitmap(self,default="some.ico")
@@ -151,56 +150,80 @@ class SerialPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        generalpagebutt = tk.Button(self, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
-        generalpagebutt.grid(row=0, column=0)
+        self.generalpagebutt = tk.Button(self, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
+        self.generalpagebutt.grid(row=0, column=0)
 
-        filesyspagebutt = tk.Button(self, text="File System", width=10, eight=2, command=lambda: controller.show_frame(FileSYSPage))
-        filesyspagebutt.grid(row=0, column=1)
+        self.filesyspagebutt = tk.Button(self, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
+        self.filesyspagebutt.grid(row=0, column=1)
 
-        serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, bg='gray', command=lambda: controller.show_frame(SerialPage))
-        serialpagebutt.grid(row=0, column=2)
+        self.serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, bg='gray', command=lambda: controller.show_frame(SerialPage))
+        self.serialpagebutt.grid(row=0, column=2)
 
-        networkpagebutt = tk.Button(self, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
-        networkpagebutt.grid(row=0, column=3)
+        self.networkpagebutt = tk.Button(self, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
+        self.networkpagebutt.grid(row=0, column=3)
 
-        generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
-        generalcontrollsframe.grid(row=1, column=0, columnspan=4, sticky="nsew")
+        self.generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
+        self.generalcontrollsframe.grid(row=1, column=0, columnspan=4, sticky="nsew")
 
-        portlbl = ttk.Label(generalcontrollsframe, text="Port", width=16)
-        portlbl.grid(row=0, column=0)
-        portcb = ttk.Combobox(generalcontrollsframe)
-        portcb.config(values=('1', '2', '3', '4'))
-        portcb.grid(row=0, column=1)
+        self.portlbl = ttk.Label(self.generalcontrollsframe, text="Port", width=16)
+        self.portlbl.grid(row=0, column=0)
+        self.portcb_val = StringVar()
+        self.portcb_val = ser111.ser.port
+        self.portcb = ttk.Combobox(self.generalcontrollsframe, textvariable=self.portcb_val, state='readonly')
+        i=0
+        for port in ser111.portList:
+            if port == ser111.ser.port:
+                break
+            else:
+                i = i + 1
 
-        baudratelbl = ttk.Label(generalcontrollsframe, text="Baudrate", width=16)
-        baudratelbl.grid(row=2, column=0)
-        baudrate = ttk.Combobox(generalcontrollsframe)
-        baudrate.config(values=('9600', '19200', '38400', '57600', '115200'))
-        baudrate.grid(row=2, column=1)
+        self.portcb.config(values=(ser111.portList))
+        self.portcb.current(i)
+        self.portcb.grid(row=0, column=1)
 
-        databitslbl = ttk.Label(generalcontrollsframe, text="Data Bits", width=16)
-        databitslbl.grid(row=3, column=0)
-        databits = ttk.Combobox(generalcontrollsframe)
-        databits.config(values=('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
-        databits.grid(row=3, column=1)
+        self.baudratelbl = ttk.Label(self.generalcontrollsframe, text="Baudrate", width=16)
+        self.baudratelbl.grid(row=2, column=0)
+        self.baudrate_val = StringVar()
+        self.baudrate_val = ser111.ser.baudrate
+        baudRatelist = ['9600', '19200', '38400', '57600', '115200']
+        self.baudrate = ttk.Combobox(self.generalcontrollsframe, textvariable=self.baudrate_val, state='readonly')
+        i=0
+        for brate in baudRatelist:
+            if brate == str(ser111.ser.baudrate):
+                break
+            else:
+                i = i + 1
+        self.baudrate.config(values=(baudRatelist))
+        self.baudrate.current(i)
+        self.baudrate.grid(row=2, column=1)
 
-        paritybitslbl = ttk.Label(generalcontrollsframe, text="Paritybits", width=16)
-        paritybitslbl.grid(row=4, column=0)
-        paritybits = ttk.Combobox(generalcontrollsframe)
-        paritybits.config(values=('none N', 'odd (O)', 'even (E)', 'mark (M)', 'space (S)'))
-        paritybits.grid(row=4, column=1)
+        self.databitslbl = ttk.Label(self.generalcontrollsframe, text="Data Bits", width=16)
+        self.databitslbl.grid(row=3, column=0)
+        self.databits = ttk.Combobox(self.generalcontrollsframe)
+        self.databits.config(values=('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
+        self.databits.grid(row=3, column=1)
 
-        stopbitslbl = ttk.Label(generalcontrollsframe, text="Stopbits", width=16)
-        stopbitslbl.grid(row=5, column=0)
-        stopbits = ttk.Combobox(generalcontrollsframe)
-        stopbits.config(values=('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
-        stopbits.grid(row=5, column=1)
+        self.paritybitslbl = ttk.Label(self.generalcontrollsframe, text="Paritybits", width=16)
+        self.paritybitslbl.grid(row=4, column=0)
+        self.paritybits = ttk.Combobox(self.generalcontrollsframe)
+        self.paritybits.config(values=('N', 'O', 'E', 'M', 'S'))
+        self.paritybits.grid(row=4, column=1)
 
-        setserial = ttk.Button(generalcontrollsframe, text="Set", width=16)
-        setserial.grid(row=6, column=0, columnspan=2)
+        self.stopbitslbl = ttk.Label(self.generalcontrollsframe, text="Stopbits", width=16)
+        self.stopbitslbl.grid(row=5, column=0)
+        self.stopbits = ttk.Combobox(self.generalcontrollsframe)
+        self.stopbits.config(values=('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
+        self.stopbits.grid(row=5, column=1)
 
+        self.setserial = ttk.Button(self.generalcontrollsframe, text="Set", width=16)
+        self.setserial.grid(row=6, column=0, columnspan=2)
+
+        self.update_info()
         # testbut = ttk.Button(GeneralControllsframe,text="3")
         # testbut.grid(row=0,column =0)
+    def update_info(self):
+        self.portcb_val = ser111.ser.port
+        print(ser111.ser.port)
 
 
 class NetworkPage(tk.Frame):
@@ -266,6 +289,7 @@ class SerialStuff:
 
         self.ser = serial.Serial()  # creates serial object
         self.grbl_version = "Grbl Not Detected"
+        self.portList = []
 
     def serial_ports(self):  # Finds open serial ports on Computer
         # print("find ports")
@@ -294,6 +318,7 @@ class SerialStuff:
                 result.append(port)
             except(OSError, serial.SerialException):
                 pass
+        self.portList = result
         return result
 
     def grbl_info(self, ver):  # Sets ver Num
@@ -343,6 +368,7 @@ class SerialStuff:
         available_ports = self.serial_ports()
         # print("port start")
         i = 0
+        p = ''
         for port in available_ports:
             # print(port)
             self.serial_setup(port, 115200, None, None, None, None)
@@ -362,6 +388,7 @@ class SerialStuff:
                         self.grbl_version = data
                         # print(data)
                         i = 1
+                        p = port
                         break
                 self.ser.close()
 
@@ -385,7 +412,6 @@ class SerialStuff:
 
 ser111 = SerialStuff()
 ser111.auto_setup(115200, None, None, None, 5)
-print(ser111.grbl_version)
 app = NobleLaser()
 
 app.mainloop()
