@@ -42,3 +42,4 @@ Ncsetting.place(y=300, x=0)
 Uitext1 = Text(Userinfo, width=70, height=20, wrap ="word",bg="gray")
 Uitext1.place(y=0, x=0)
 root.mainloop()
+s
