@@ -1,12 +1,10 @@
 import sys
-import socket
+# import socket
 import glob
 import time
 import serial
 import tkinter as tk
 from tkinter import ttk
-from unidecode import unidecode
-
 
 
 class NobleLaser(tk.Tk):  # V0.0.1
@@ -43,20 +41,20 @@ class GeneralPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         # main Frame with nav buttons //start
 
-        generalpagebutt = tk.Button(self, text="General",width=10,height=2,bg = 'gray',command=lambda: controller.show_frame(GeneralPage))
-        #generalPagebutt.place(y=0, x=0)
+        generalpagebutt = tk.Button(self, text="General", width=10, height=2, bg='gray',command=lambda: controller.show_frame(GeneralPage))
+        # generalPagebutt.place(y=0, x=0)
         generalpagebutt.grid(row=0, column=0)
 
-        filesyspagebutt = tk.Button(self, text="File System",width=10,height=2, command=lambda: controller.show_frame(FileSYSPage))
-        #filesysPagebutt.place(y=0, x=0)
+        filesyspagebutt = tk.Button(self, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
+        # filesysPagebutt.place(y=0, x=0)
         filesyspagebutt.grid(row=0, column=1)
 
-        serialpagebutt = tk.Button(self, text="Serial",width=10,height=2, command=lambda: controller.show_frame(SerialPage))
-        #SerialPagebutt.place(y=0, x=0)
+        serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
+        # SerialPagebutt.place(y=0, x=0)
         serialpagebutt.grid(row=0, column=2)
 
-        networkpagebutt = tk.Button(self, text="Network",width=10,height=2, command=lambda: controller.show_frame(NetworkPage))
-        #NetworkPagebutt.place(y=0, x=0)
+        networkpagebutt = tk.Button(self, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
+        # NetworkPagebutt.place(y=0, x=0)
         networkpagebutt.grid(row=0, column=3)
 
         # main Frame with nav buttons //End
@@ -91,8 +89,8 @@ class GeneralPage(tk.Frame):
         grbldown = ttk.Button(generalcontrollsframe, text="Load Program", width=16)
         grbldown.grid(row=5, column=2, )
 
-        #testbut = ttk.Button(GeneralControllsframe, text="1")
-        #testbut.grid(row=0, column=0)
+        # testbut = ttk.Button(GeneralControllsframe, text="1")
+        # testbut.grid(row=0, column=0)
 
         # secondary frame with page controlls //End
 
@@ -101,16 +99,16 @@ class FileSYSPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        generalpagebutt = tk.Button(self, text="General",width=10,height=2, command=lambda: controller.show_frame(GeneralPage))
+        generalpagebutt = tk.Button(self, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
         generalpagebutt.grid(row=0, column=0)
 
-        filesyspagebutt = tk.Button(self, text="File System",width=10,height=2,bg = 'gray', command=lambda: controller.show_frame(FileSYSPage))
+        filesyspagebutt = tk.Button(self, text="File System", width=10, height=2, bg='gray', command=lambda: controller.show_frame(FileSYSPage))
         filesyspagebutt.grid(row=0, column=1)
 
-        serialpagebutt = tk.Button(self, text="Serial",width=10,height=2, command=lambda: controller.show_frame(SerialPage))
+        serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
         serialpagebutt.grid(row=0, column=2)
 
-        networkpagebutt = tk.Button(self, text="Network",width=10,height=2, command=lambda: controller.show_frame(NetworkPage))
+        networkpagebutt = tk.Button(self, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
         networkpagebutt.grid(row=0, column=3)
 
         generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
@@ -153,20 +151,20 @@ class SerialPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        generalpagebutt = tk.Button(self, text="General",width=10,height=2, command=lambda: controller.show_frame(GeneralPage))
+        generalpagebutt = tk.Button(self, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
         generalpagebutt.grid(row=0, column=0)
 
-        filesyspagebutt = tk.Button(self, text="File System",width=10,height=2, command=lambda: controller.show_frame(FileSYSPage))
+        filesyspagebutt = tk.Button(self, text="File System", width=10, eight=2, command=lambda: controller.show_frame(FileSYSPage))
         filesyspagebutt.grid(row=0, column=1)
 
-        serialpagebutt = tk.Button(self, text="Serial",width=10,height=2,bg = 'gray', command=lambda: controller.show_frame(SerialPage))
+        serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, bg='gray', command=lambda: controller.show_frame(SerialPage))
         serialpagebutt.grid(row=0, column=2)
 
-        networkpagebutt = tk.Button(self, text="Network",width=10,height=2, command=lambda: controller.show_frame(NetworkPage))
+        networkpagebutt = tk.Button(self, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
         networkpagebutt.grid(row=0, column=3)
 
         generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
-        generalcontrollsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
+        generalcontrollsframe.grid(row=1, column=0, columnspan=4, sticky="nsew")
 
         portlbl = ttk.Label(generalcontrollsframe, text="Port", width=16)
         portlbl.grid(row=0, column=0)
@@ -209,20 +207,20 @@ class NetworkPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        generalpagebutt = tk.Button(self, text="General",width=10,height=2, command=lambda: controller.show_frame(GeneralPage))
+        generalpagebutt = tk.Button(self, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
         generalpagebutt.grid(row=0, column=0)
 
-        filesyspagebutt = tk.Button(self, text="File System",width=10,height=2, command=lambda: controller.show_frame(FileSYSPage))
+        filesyspagebutt = tk.Button(self, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
         filesyspagebutt.grid(row=0, column=1)
 
-        serialpagebutt = tk.Button(self, text="Serial",width=10,height=2, command=lambda: controller.show_frame(SerialPage))
+        serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
         serialpagebutt.grid(row=0, column=2)
 
-        networkpagebutt = tk.Button(self, text="Network",width=10,height=2,bg = 'gray', command=lambda: controller.show_frame(NetworkPage))
+        networkpagebutt = tk.Button(self, text="Network", width=10, height=2, bg='gray', command=lambda: controller.show_frame(NetworkPage))
         networkpagebutt.grid(row=0, column=3)
 
         generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
-        generalcontrollsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
+        generalcontrollsframe.grid(row=1, column=0, columnspan=4, sticky="nsew")
 
         static = ttk.Radiobutton(generalcontrollsframe, text="Static")
         static.grid(row=0, column=1)
@@ -266,12 +264,12 @@ class SerialStuff:
 
     def __init__(self):
 
-        self.ser = serial.Serial()
-        self.grbl_version="Grbl Not Detected"
+        self.ser = serial.Serial()  # creates serial object
+        self.grbl_version = "Grbl Not Detected"
 
-    def serial_ports(self):
-        print("find ports")
-        print(sys.platform)
+    def serial_ports(self):  # Finds open serial ports on Computer
+        # print("find ports")
+        # print(sys.platform)
         if sys.platform.startswith('win'):
             ports = ['COM%s' % (i+1)for i in range(256)]
         elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
@@ -284,73 +282,72 @@ class SerialStuff:
         for port in ports:
             self.serial_setup(port, 115200, None, None, None, None)
 
-            print("after serial")
+            # print("after serial")
             try:
-                print(port)
-                print("Yes1")
+                # print(port)
+                # print("Yes1")
                 self.ser.open()
-                print("Yes2")
+                # print("Yes2")
                 self.ser.close()
-                print("Yes3")
+                # print("Yes3")
 
                 result.append(port)
             except(OSError, serial.SerialException):
                 pass
         return result
 
-    def grbl_info(self, ver):
+    def grbl_info(self, ver):  # Sets ver Num
         self.grbl_version = ver
 
-    def auto_setup(self, baud_rate, byte_size, parity_bits, stop_bits, time_out):
+    def auto_setup(self, baud_rate, byte_size, parity_bits, stop_bits, time_out):  # used in auto find grbl
 
         self.ser.baudrate = baud_rate
 
-        if byte_size != None:
+        if byte_size is not None:
             self.ser.bytesize = byte_size
 
-        if parity_bits != None:
+        if parity_bits is not None:
             self.ser.parity = parity_bits
 
-        if stop_bits != None:
+        if stop_bits is not None:
             self.ser.stopbits = stop_bits
 
-        if time_out != None:
+        if time_out is not None:
             self.ser.timeout = time_out
 
         self.auto_find_grbl()
 
-    def serial_setup(self, comport, baud_rate, byte_size, parity_bits, stop_bits, time_out):
+    def serial_setup(self, comport, baud_rate, byte_size, parity_bits, stop_bits, time_out):  # port setup
 
         self.ser.port = comport
 
-        if baud_rate != None:
+        if baud_rate is not None:
             self.ser.baudrate = baud_rate
 
-        if byte_size != None:
+        if byte_size is not None:
             self.ser.bytesize = byte_size
 
-        if parity_bits != None:
+        if parity_bits is not None:
             self.ser.parity = parity_bits
 
-        if stop_bits != None:
+        if stop_bits is not None:
             self.ser.stopbits = stop_bits
 
-        if time_out != None:
+        if time_out is not None:
             self.ser.timeout = time_out
 
-    # def Stored_serial_Setup(self):
+        # def Stored_serial_Setup(self):
         # with open('SerialConfig.py','r',encoding='ascii') as f:
 
-    def auto_find_grbl(self):
+    def auto_find_grbl(self):  # finds what port grbl is on and sets it to serial setup
         available_ports = self.serial_ports()
-        print ("port start")
+        # print("port start")
         i = 0
         for port in available_ports:
-            print(port)
+            # print(port)
             self.serial_setup(port, 115200, None, None, None, None)
             try:
                 self.ser.open()
-
 
                 time.sleep(3)
                 # test.write(self,'$I')
@@ -359,16 +356,17 @@ class SerialStuff:
                     data = self.ser.readline().strip().decode('ascii')
                     # print(data)
                     if data.find('Grbl') < 0:
-                        print("No data")
+                        # print("No data")
+                        u = 1
                     else:
                         self.grbl_version = data
-                        print(data)
+                        # print(data)
                         i = 1
                         break
                 self.ser.close()
 
             except (OSError, serial.SerialException):
-                print("dam")
+                # print("dam")
                 pass
             if i == 1:
                 break
