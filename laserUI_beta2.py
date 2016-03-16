@@ -1,9 +1,11 @@
 import sys
 import socket
 import glob
+import time
 import serial
 import tkinter as tk
 from tkinter import ttk
+from unidecode import unidecode
 
 
 
@@ -13,7 +15,7 @@ class NobleLaser(tk.Tk):  # V0.0.1
         Ver = "V 0.0.1"
         tk.Tk.__init__(self, *args, **kwargs)
 
-        tk.Tk.wm_title(self, "Noble Laser " + Ver)
+        tk.Tk.wm_title(self, "Noble Laser " + Ver + " --- " + ser111.grbl_version)
         tk.Tk.wm_geometry(self, "800x480+100+100")
         tk.Tk.wm_resizable(self, False, False)
         # tk.Tk.iconbitmap(self,default="some.ico")
@@ -265,13 +267,13 @@ class SerialStuff:
     def __init__(self):
 
         self.ser = serial.Serial()
-        self.grbl_version=""
+        self.grbl_version="Grbl Not Detected"
 
     def serial_ports(self):
         print("find ports")
         print(sys.platform)
         if sys.platform.startswith('win'):
-            ports = ['COM%s' % (i+1)for i in range(50)]
+            ports = ['COM%s' % (i+1)for i in range(256)]
         elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
             ports = glob.glob('/dev/tty[A-Za-z]*')
         elif sys.platform.startswith('darwin'):
@@ -280,8 +282,8 @@ class SerialStuff:
             raise EnvironmentError('Unsupported platform')
         result = []
         for port in ports:
-            self.serial_setup(port, None, None, None, None)
-            self.ser.close()
+            self.serial_setup(port, 115200, None, None, None, None)
+
             print("after serial")
             try:
                 print(port)
@@ -292,27 +294,49 @@ class SerialStuff:
                 print("Yes3")
 
                 result.append(port)
-            except (OSError, serial.SerialException):
+            except(OSError, serial.SerialException):
                 pass
         return result
 
     def grbl_info(self, ver):
         self.grbl_version = ver
 
-    def auto_setup(self, baud_rate, byte_size, parity_bits, stop_bits):
-        self.ser.Baud_Rate = baud_rate
-        self.ser.Byte_Size = byte_size
-        self.ser.Parity = parity_bits
-        self.ser.Stop_Bits = stop_bits
+    def auto_setup(self, baud_rate, byte_size, parity_bits, stop_bits, time_out):
+
+        self.ser.baudrate = baud_rate
+
+        if byte_size != None:
+            self.ser.bytesize = byte_size
+
+        if parity_bits != None:
+            self.ser.parity = parity_bits
+
+        if stop_bits != None:
+            self.ser.stopbits = stop_bits
+
+        if time_out != None:
+            self.ser.timeout = time_out
+
         self.auto_find_grbl()
 
-    def serial_setup(self, comport, baud_rate, byte_size, parity_bits, stop_bits):
+    def serial_setup(self, comport, baud_rate, byte_size, parity_bits, stop_bits, time_out):
 
         self.ser.port = comport
-        self.ser.Baud_Rate = baud_rate
-        self.ser.Byte_Size = byte_size
-        self.ser.Parity = parity_bits
-        self.ser.Stop_Bits = stop_bits
+
+        if baud_rate != None:
+            self.ser.baudrate = baud_rate
+
+        if byte_size != None:
+            self.ser.bytesize = byte_size
+
+        if parity_bits != None:
+            self.ser.parity = parity_bits
+
+        if stop_bits != None:
+            self.ser.stopbits = stop_bits
+
+        if time_out != None:
+            self.ser.timeout = time_out
 
     # def Stored_serial_Setup(self):
         # with open('SerialConfig.py','r',encoding='ascii') as f:
@@ -323,22 +347,25 @@ class SerialStuff:
         i = 0
         for port in available_ports:
             print(port)
-            self.serial_setup(port, 115200, None, None, None)
+            self.serial_setup(port, 115200, None, None, None, None)
             try:
-                test = self.ser
-                test.open()
-                test.write(bytearray('\n', 'ascii'))
+                self.ser.open()
+
+
+                time.sleep(3)
                 # test.write(self,'$I')
 
-                while True:
-                    data = test.readline().strip().decode("ascii")
-                    print(data)
+                while self.ser.inWaiting():
+                    data = self.ser.readline().strip().decode('ascii')
+                    # print(data)
                     if data.find('Grbl') < 0:
+                        print("No data")
+                    else:
                         self.grbl_version = data
                         print(data)
                         i = 1
                         break
-                test.close()
+                self.ser.close()
 
             except (OSError, serial.SerialException):
                 print("dam")
@@ -359,7 +386,7 @@ class SerialStuff:
 #     def staticip(self, ip_address, subnet_mask, gateway, dns1, dns2):
 
 ser111 = SerialStuff()
-ser111.auto_setup(115200, None, None, None)
+ser111.auto_setup(115200, None, None, None, 5)
 print(ser111.grbl_version)
 app = NobleLaser()
 
