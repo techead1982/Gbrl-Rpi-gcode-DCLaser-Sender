@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7d6efb55-d62f-4c41-9e7a-be703faf261d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tree stuff.py" afterPath="$PROJECT_DIR$/tree stuff.py" />
     </list>
     <ignored path="gbrl-laser2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,8 +49,8 @@
       <file leaf-file-name="tree stuff.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tree stuff.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44630072">
-              <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.12171838">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -166,7 +167,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="C:/Program Files (x86)/Git/cmd/git.exe" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="ChangesBrowser.SHOW_FLATTEN" value="true" />
   </component>
@@ -461,7 +462,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458168613186</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="drop old fiel and">
+      <created>1458168620928</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1458168620928</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -508,7 +515,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/tree stuff.py</url>
-          <line>2</line>
+          <line>3</line>
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="1" />
@@ -737,8 +744,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tree stuff.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44630072">
-          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.12171838">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
