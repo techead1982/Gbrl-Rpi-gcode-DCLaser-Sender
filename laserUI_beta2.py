@@ -4,7 +4,7 @@ import glob
 import time
 import serial
 import tkinter as tk
-from tkinter import ttk, StringVar
+from tkinter import ttk, StringVar, IntVar
 
 
 class NobleLaser(tk.Tk):  # V0.0.1
@@ -38,55 +38,63 @@ class NobleLaser(tk.Tk):  # V0.0.1
 class GeneralPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        # main Frame with nav buttons //start
 
-        generalpagebutt = tk.Button(self, text="General", width=10, height=2, bg='gray',command=lambda: controller.show_frame(GeneralPage))
-        # generalPagebutt.place(y=0, x=0)
-        generalpagebutt.grid(row=0, column=0)
+        self.generalnavframe = ttk.Frame(self)
+        self.generalnavframe.grid(row=0, column=0, sticky="nsew")
 
-        filesyspagebutt = tk.Button(self, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
-        # filesysPagebutt.place(y=0, x=0)
-        filesyspagebutt.grid(row=0, column=1)
+        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=2, bg='gray',command=lambda: controller.show_frame(GeneralPage))
+        self.generalpagebutt.grid(row=0, column=0)
 
-        serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
-        # SerialPagebutt.place(y=0, x=0)
-        serialpagebutt.grid(row=0, column=2)
+        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
+        self.filesyspagebutt.grid(row=0, column=1)
 
-        networkpagebutt = tk.Button(self, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
-        # NetworkPagebutt.place(y=0, x=0)
-        networkpagebutt.grid(row=0, column=3)
+        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
+        self.serialpagebutt.grid(row=0, column=2)
+
+        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
+        self.networkpagebutt.grid(row=0, column=3)
 
         # main Frame with nav buttons //End
         # secondary frame with page controlls //Start
 
-        generalcontrollsframe = ttk.Frame(self)
-        generalcontrollsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
+        self.generalcontrollsframe = ttk.Frame(self)
+        self.generalcontrollsframe.grid(row=1, column=0, sticky="nsew")
 
-        grbllbl = ttk.Label(generalcontrollsframe, text="Controller Status", width=16)
-        grbllbl.grid(row=0, column=0)
-        grblstatus = ttk.Label(generalcontrollsframe, width=16, text="Connected")
-        grblstatus.grid(row=0, column=1)
+        self.grbllbl = ttk.Label(self.generalcontrollsframe, text="Controller Status", width=16)
+        self.grbllbl.grid(row=0, column=0)
+        self.grblstatus = ttk.Label(self.generalcontrollsframe, width=16, text="Connected")
+        self.grblstatus.grid(row=0, column=1)
 
-        grblhome = ttk.Button(generalcontrollsframe, text="Home Laser", width=16)
-        grblhome.grid(row=1,column=0)
-        grblstop = ttk.Button(generalcontrollsframe, text="Stop Laser", width=16)
-        grblstop.grid(row=1, column=1)
-        grblend = ttk.Button(generalcontrollsframe, text="End Program", width=16)
-        grblend.grid(row=1, column=2)
-        grblhold = ttk.Button(generalcontrollsframe, text="Hold Laser", width=16)
-        grblhold.grid(row=2, column=0)
-        grblstart = ttk.Button(generalcontrollsframe, text="Start Laser", width=16)
-        grblstart.grid(row=2, column=1)
-        grblup = ttk.Button(generalcontrollsframe, text="+Z", width=16)
-        grblup.grid(row=4, column=0, columnspan=2)
-        grblleft = ttk.Button(generalcontrollsframe, text="-X", width=16)
-        grblleft.grid(row=5, column=0)
-        grblright = ttk.Button(generalcontrollsframe, text="+X", width=16)
-        grblright.grid(row=5, column=1)
-        grbldown = ttk.Button(generalcontrollsframe, text="-Z", width=16)
-        grbldown.grid(row=6, column=0, columnspan=2)
-        grbldown = ttk.Button(generalcontrollsframe, text="Load Program", width=16)
-        grbldown.grid(row=5, column=2, )
+        self.grblhome = ttk.Button(self.generalcontrollsframe, text="Home Laser", width=16)
+        self.grblhome.grid(row=1,column=0)
+        self.grblstop = ttk.Button(self.generalcontrollsframe, text="Stop Laser", width=16)
+        self.grblstop.grid(row=1, column=1)
+        self.grblend = ttk.Button(self.generalcontrollsframe, text="End Program", width=16)
+        self.grblend.grid(row=1, column=2)
+        self.grblhold = ttk.Button(self.generalcontrollsframe, text="Hold Laser", width=16)
+        self.grblhold.grid(row=2, column=0)
+        self.grblstart = ttk.Button(self.generalcontrollsframe, text="Start Laser", width=16)
+        self.grblstart.grid(row=2, column=1)
+        self.grblup = ttk.Button(self.generalcontrollsframe, text="+Z", width=16)
+        self.grblup.grid(row=4, column=0, columnspan=2)
+        self.grblleft = ttk.Button(self.generalcontrollsframe, text="-X", width=16)
+        self.grblleft.grid(row=5, column=0)
+        self.grblright = ttk.Button(self.generalcontrollsframe, text="+X", width=16)
+        self.grblright.grid(row=5, column=1)
+        self.grbldown = ttk.Button(self.generalcontrollsframe, text="-Z", width=16)
+        self.grbldown.grid(row=6, column=0, columnspan=2)
+        self.grbldown = ttk.Button(self.generalcontrollsframe, text="Load Program", width=16)
+        self.grbldown.grid(row=5, column=2, )
+
+        self.generalgcodeframe = ttk.Frame(self)
+        self.generalgcodeframe.grid(row=2, column=0, sticky="nsew")
+
+        self.grbltree = ttk.Treeview(self.generalgcodeframe, columns=('#', 'G-code', 'Status', 'Reply'))
+        self.grbltree.heading('#0', text='#')
+        self.grbltree.heading('#1', text='G-code')
+        self.grbltree.heading('#2', text='Status')
+        self.grbltree.heading('#3', text='Reply')
+        self.grbltree.grid(row=0, column=0)
 
         # testbut = ttk.Button(GeneralControllsframe, text="1")
         # testbut.grid(row=0, column=0)
@@ -98,49 +106,52 @@ class FileSYSPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        generalpagebutt = tk.Button(self, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
-        generalpagebutt.grid(row=0, column=0)
+        self.generalnavframe = ttk.Frame(self)
+        self.generalnavframe.grid(row=0, column=0, sticky="nsew")
 
-        filesyspagebutt = tk.Button(self, text="File System", width=10, height=2, bg='gray', command=lambda: controller.show_frame(FileSYSPage))
-        filesyspagebutt.grid(row=0, column=1)
+        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
+        self.generalpagebutt.grid(row=0, column=0)
 
-        serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
-        serialpagebutt.grid(row=0, column=2)
+        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=2, bg='gray', command=lambda: controller.show_frame(FileSYSPage))
+        self.filesyspagebutt.grid(row=0, column=1)
 
-        networkpagebutt = tk.Button(self, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
-        networkpagebutt.grid(row=0, column=3)
+        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
+        self.serialpagebutt.grid(row=0, column=2)
 
-        generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
-        generalcontrollsframe.grid(row=1, column=0,columnspan=4,sticky="nsew")
+        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
+        self.networkpagebutt.grid(row=0, column=3)
 
-        homedirlbl = ttk.Label(generalcontrollsframe, text="Home Dir", width=16)
-        homedirlbl.grid(row=0, column=0)
-        homedir = ttk.Entry(generalcontrollsframe, width=16)
-        homedir.grid(row=0, column=1)
+        self.generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
+        self.generalcontrollsframe.grid(row=1, column=0, sticky="nsew")
 
-        remotedirlbl = ttk.Label(generalcontrollsframe, text="Remote Dir", width=16)
-        remotedirlbl.grid(row=2, column=0)
-        remotedir = ttk.Entry(generalcontrollsframe, width=16)
-        remotedir.grid(row=2, column=1)
+        self.homedirlbl = ttk.Label(self.generalcontrollsframe, text="Home Dir", width=16)
+        self.homedirlbl.grid(row=0, column=0)
+        self.homedir = ttk.Entry(self.generalcontrollsframe, width=16)
+        self.homedir.grid(row=0, column=1)
 
-        copytodir = ttk.Button(generalcontrollsframe, text="Copy TO Remote Dir", width=16)
-        copytodir.grid(row=3, column=0)
+        self.remotedirlbl = ttk.Label(self.generalcontrollsframe, text="Remote Dir", width=16)
+        self.remotedirlbl.grid(row=2, column=0)
+        self.remotedir = ttk.Entry(self.generalcontrollsframe, width=16)
+        self.remotedir.grid(row=2, column=1)
 
-        from_dir = ttk.Button(generalcontrollsframe, text="From TO Remote Dir", width=16)
-        from_dir.grid(row=3, column=1)
+        self.copytodir = ttk.Button(self.generalcontrollsframe, text="Copy TO Remote Dir", width=16)
+        self.copytodir.grid(row=3, column=0)
 
-        usernamelbl = ttk.Label(generalcontrollsframe, text="Username", width=16)
-        usernamelbl.grid(row=4, column=0)
-        username = ttk.Entry(generalcontrollsframe, width=16)
-        username.grid(row=4, column=1)
+        self.from_dir = ttk.Button(self.generalcontrollsframe, text="From TO Remote Dir", width=16)
+        self.from_dir.grid(row=3, column=1)
 
-        passwordlbl = ttk.Label(generalcontrollsframe, text="Password", width=16)
-        passwordlbl.grid(row=5, column=0)
-        password = tk.Entry(generalcontrollsframe, width=16)
-        password.grid(row=5, column=1)
+        self.usernamelbl = ttk.Label(self.generalcontrollsframe, text="Username", width=16)
+        self.usernamelbl.grid(row=4, column=0)
+        self.username = ttk.Entry(self.generalcontrollsframe, width=16)
+        self.username.grid(row=4, column=1)
 
-        setfilesys = ttk.Button(generalcontrollsframe, text="Set", width=16)
-        setfilesys.grid(row=6, column=0, columnspan=2)
+        self.passwordlbl = ttk.Label(self.generalcontrollsframe, text="Password", width=16)
+        self.passwordlbl.grid(row=5, column=0)
+        self.password = tk.Entry(self.generalcontrollsframe, width=16)
+        self.password.grid(row=5, column=1)
+
+        self.setfilesys = ttk.Button(self.generalcontrollsframe, text="Set", width=16)
+        self.setfilesys.grid(row=6, column=0, columnspan=2)
 
         # testbut = ttk.Button(GeneralControllsframe,text="2")
         # testbut.grid(row=0,column =0)
@@ -150,20 +161,23 @@ class SerialPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        self.generalpagebutt = tk.Button(self, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
+        self.generalnavframe = ttk.Frame(self)
+        self.generalnavframe.grid(row=0, column=0, sticky="nsew")
+
+        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
         self.generalpagebutt.grid(row=0, column=0)
 
-        self.filesyspagebutt = tk.Button(self, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
+        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
         self.filesyspagebutt.grid(row=0, column=1)
 
-        self.serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, bg='gray', command=lambda: controller.show_frame(SerialPage))
+        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=2, bg='gray', command=lambda: controller.show_frame(SerialPage))
         self.serialpagebutt.grid(row=0, column=2)
 
-        self.networkpagebutt = tk.Button(self, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
+        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
         self.networkpagebutt.grid(row=0, column=3)
 
         self.generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
-        self.generalcontrollsframe.grid(row=1, column=0, columnspan=4, sticky="nsew")
+        self.generalcontrollsframe.grid(row=1, column=0, sticky="nsew")
 
         self.portlbl = ttk.Label(self.generalcontrollsframe, text="Port", width=16)
         self.portlbl.grid(row=0, column=0)
@@ -175,9 +189,9 @@ class SerialPage(tk.Frame):
             if port == ser111.ser.port:
                 break
             else:
-                i = i + 1
+                i += 1
 
-        self.portcb.config(values=(ser111.portList))
+        self.portcb.config(values=ser111.portList)
         self.portcb.current(i)
         self.portcb.grid(row=0, column=1)
 
@@ -185,34 +199,68 @@ class SerialPage(tk.Frame):
         self.baudratelbl.grid(row=2, column=0)
         self.baudrate_val = StringVar()
         self.baudrate_val = ser111.ser.baudrate
-        baudRatelist = ['9600', '19200', '38400', '57600', '115200']
+        baudratelist = ['9600', '19200', '38400', '57600', '115200']
         self.baudrate = ttk.Combobox(self.generalcontrollsframe, textvariable=self.baudrate_val, state='readonly')
         i=0
-        for brate in baudRatelist:
+        for brate in baudratelist:
             if brate == str(ser111.ser.baudrate):
                 break
             else:
-                i = i + 1
-        self.baudrate.config(values=(baudRatelist))
+                i += 1
+
+        self.baudrate.config(values=baudratelist)
         self.baudrate.current(i)
         self.baudrate.grid(row=2, column=1)
 
         self.databitslbl = ttk.Label(self.generalcontrollsframe, text="Data Bits", width=16)
         self.databitslbl.grid(row=3, column=0)
-        self.databits = ttk.Combobox(self.generalcontrollsframe)
-        self.databits.config(values=('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
+        self.databits_val = StringVar()
+        self.databits_val = ser111.ser.bytesize
+        databitslist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+        self.databits = ttk.Combobox(self.generalcontrollsframe, textvariable=self.databits_val, state='readonly')
+        i = 0
+        for dbits in databitslist:
+            if dbits == str(ser111.ser.bytesize):
+                break
+            else:
+                i += 1
+
+        self.databits.config(values=databitslist)
+        self.databits.current(i)
         self.databits.grid(row=3, column=1)
 
         self.paritybitslbl = ttk.Label(self.generalcontrollsframe, text="Paritybits", width=16)
         self.paritybitslbl.grid(row=4, column=0)
-        self.paritybits = ttk.Combobox(self.generalcontrollsframe)
-        self.paritybits.config(values=('N', 'O', 'E', 'M', 'S'))
+        self.paritybits_val = StringVar()
+        self.paritybits_val = ser111.ser.parity
+        paritybitslist = ['N', 'O', 'E', 'M', 'S']
+        self.paritybits = ttk.Combobox(self.generalcontrollsframe, textvariable=self.paritybits_val, state='readonly')
+        i = 0
+        for pbits in paritybitslist:
+            if pbits == ser111.ser.parity:
+                break
+            else:
+                i += 1
+
+        self.paritybits.config(values=paritybitslist)
+        self.paritybits.current(i)
         self.paritybits.grid(row=4, column=1)
 
         self.stopbitslbl = ttk.Label(self.generalcontrollsframe, text="Stopbits", width=16)
         self.stopbitslbl.grid(row=5, column=0)
-        self.stopbits = ttk.Combobox(self.generalcontrollsframe)
-        self.stopbits.config(values=('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
+        self.stopbits_val = StringVar()
+        self.stopbits_val = ser111.ser.stopbits
+        stopbitslist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+        self.stopbits = ttk.Combobox(self.generalcontrollsframe, textvariable=self.stopbits_val, state='readonly')
+        i = 0
+        for sbits in stopbitslist:
+            if sbits == str(ser111.ser.stopbits):
+                break
+            else:
+                i += 1
+
+        self.stopbits.config(values=stopbitslist)
+        self.stopbits.current(i)
         self.stopbits.grid(row=5, column=1)
 
         self.setserial = ttk.Button(self.generalcontrollsframe, text="Set", width=16)
@@ -230,54 +278,60 @@ class NetworkPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        generalpagebutt = tk.Button(self, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
-        generalpagebutt.grid(row=0, column=0)
+        self.generalnavframe = ttk.Frame(self)
+        self.generalnavframe.grid(row=0, column=0, sticky="nsew")
 
-        filesyspagebutt = tk.Button(self, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
-        filesyspagebutt.grid(row=0, column=1)
+        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
+        self.generalpagebutt.grid(row=0, column=0)
 
-        serialpagebutt = tk.Button(self, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
-        serialpagebutt.grid(row=0, column=2)
+        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
+        self.filesyspagebutt.grid(row=0, column=1)
 
-        networkpagebutt = tk.Button(self, text="Network", width=10, height=2, bg='gray', command=lambda: controller.show_frame(NetworkPage))
-        networkpagebutt.grid(row=0, column=3)
+        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
+        self.serialpagebutt.grid(row=0, column=2)
 
-        generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
-        generalcontrollsframe.grid(row=1, column=0, columnspan=4, sticky="nsew")
+        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=2, bg='gray', command=lambda: controller.show_frame(NetworkPage))
+        self.networkpagebutt.grid(row=0, column=3)
 
-        static = ttk.Radiobutton(generalcontrollsframe, text="Static")
-        static.grid(row=0, column=1)
+        self.generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
+        self.generalcontrollsframe.grid(row=1, column=0, sticky="nsew")
 
-        dhcp = ttk.Radiobutton(generalcontrollsframe, text="Dhcp")
-        dhcp.grid(row=0, column=0)
+        self.var = IntVar()
+        self.var.set(2)
 
-        ipaddress = ttk.Label(generalcontrollsframe, text="Ip Address")
-        ipaddress.grid(row=1, column=0)
-        ipaddrv4 = ttk.Entry(generalcontrollsframe, width=16)
-        ipaddrv4.grid(row=1, column=1)
+        self.dhcp = ttk.Radiobutton(self.generalcontrollsframe, text="Dhcp", variable=self.var, value=2)
+        self.dhcp.grid(row=0, column=1)
 
-        subnetlbl = ttk.Label(generalcontrollsframe, text="Subnet")
-        subnetlbl.grid(row=2, column=0)
-        subnet = ttk.Entry(generalcontrollsframe, width=16)
-        subnet.grid(row=2, column=1)
+        self.static = ttk.Radiobutton(self.generalcontrollsframe, text="Static", variable=self.var, value=1)
+        self.static.grid(row=0, column=0)
 
-        gatewaylbl = ttk.Label(generalcontrollsframe, text="Gateway")
-        gatewaylbl.grid(row=3, column=0)
-        gateway = ttk.Entry(generalcontrollsframe, width=16)
-        gateway.grid(row=3, column=1)
+        self.ipaddress = ttk.Label(self.generalcontrollsframe, text="Ip Address")
+        self.ipaddress.grid(row=1, column=0)
+        self.ipaddrv4 = ttk.Entry(self.generalcontrollsframe, width=16)
+        self.ipaddrv4.grid(row=1, column=1)
 
-        dns1lbl = ttk.Label(generalcontrollsframe, text="Dns1")
-        dns1lbl.grid(row=4, column=0)
-        dns1 = ttk.Entry(generalcontrollsframe, width=16)
-        dns1.grid(row=4, column=1)
+        self.subnetlbl = ttk.Label(self.generalcontrollsframe, text="Subnet")
+        self.subnetlbl.grid(row=2, column=0)
+        self.subnet = ttk.Entry(self.generalcontrollsframe, width=16)
+        self.subnet.grid(row=2, column=1)
 
-        dns2lbl = ttk.Label(generalcontrollsframe, text="Dns2")
-        dns2lbl.grid(row=5, column=0)
-        dns2 = ttk.Entry(generalcontrollsframe, width=16)
-        dns2.grid(row=5, column=1)
+        self.gatewaylbl = ttk.Label(self.generalcontrollsframe, text="Gateway")
+        self.gatewaylbl.grid(row=3, column=0)
+        self.gateway = ttk.Entry(self.generalcontrollsframe, width=16)
+        self.gateway.grid(row=3, column=1)
 
-        setnetwork = ttk.Button(generalcontrollsframe, text="Set", width=16)
-        setnetwork.grid(row=7, column=0, columnspan=2)
+        self.dns1lbl = ttk.Label(self.generalcontrollsframe, text="Dns1")
+        self.dns1lbl.grid(row=4, column=0)
+        self.dns1 = ttk.Entry(self.generalcontrollsframe, width=16)
+        self.dns1.grid(row=4, column=1)
+
+        self.dns2lbl = ttk.Label(self.generalcontrollsframe, text="Dns2")
+        self.dns2lbl.grid(row=5, column=0)
+        self.dns2 = ttk.Entry(self.generalcontrollsframe, width=16)
+        self.dns2.grid(row=5, column=1)
+
+        self.setnetwork = ttk.Button(self.generalcontrollsframe, text="Set", width=16)
+        self.setnetwork.grid(row=7, column=0, columnspan=2)
 
         # testbut = ttk.Button(GeneralControllsframe,text="4")
         # testbut.grid(row=0,column =0)
