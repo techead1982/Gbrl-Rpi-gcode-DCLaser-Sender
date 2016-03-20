@@ -364,7 +364,7 @@ class SerialStuff:
             raise EnvironmentError('Unsupported platform')
         result = []
         for port in ports:
-            self.serial_setup(port, 115200, None, None, None, None)
+            self.serial_setup(port, self.ser.baudrate, None, None, None, None)
 
             # print("after serial")
             try:
@@ -431,7 +431,7 @@ class SerialStuff:
         p = ''
         for port in available_ports:
             # print(port)
-            self.serial_setup(port, 115200, None, None, None, None)
+            self.serial_setup(port, self.ser.baudrate, None, None, None, None)
             try:
                 self.ser.open()
 
