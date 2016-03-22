@@ -546,7 +546,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458677533339</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="drop old fiel and">
+      <created>1458677553527</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1458677553527</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
