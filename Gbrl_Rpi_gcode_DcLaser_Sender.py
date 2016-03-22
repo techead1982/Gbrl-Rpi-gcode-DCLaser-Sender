@@ -77,7 +77,7 @@ class LaserCom():
 					print( "SND: " + str(lineCount) + " : " + lineBlock,)
 					newl =b'\n'
 					s.write(bytearray(lineBlock+'\n','ascii')) # Send g-code block to grbl
-				if verbose : 
+				if verbose:
 					textBox.insert('1.0',"BUF:",str(sum(charline)),"REC:",grblOut+'\n')
 					print ("BUF:",str(sum(charline)),"REC:",grblOut)
 		time.sleep(2)

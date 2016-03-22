@@ -3,6 +3,7 @@ import sys
 import glob
 import time
 import serial
+import queue
 import tkinter as tk
 from tkinter import ttk, StringVar, IntVar
 
@@ -190,7 +191,7 @@ class SerialPage(tk.Frame):
         self.portcb_val = StringVar()
         self.portcb_val = ser111.ser.port
         self.portcb = ttk.Combobox(self.generalcontrollsframe, textvariable=self.portcb_val, state='readonly')
-        i=0
+        i = 0
         for port in ser111.portList:
             if port == ser111.ser.port:
                 break
@@ -207,7 +208,7 @@ class SerialPage(tk.Frame):
         self.baudrate_val = ser111.ser.baudrate
         baudratelist = ['9600', '19200', '38400', '57600', '115200']
         self.baudrate = ttk.Combobox(self.generalcontrollsframe, textvariable=self.baudrate_val, state='readonly')
-        i=0
+        i = 0
         for brate in baudratelist:
             if brate == str(ser111.ser.baudrate):
                 break
@@ -343,13 +344,18 @@ class NetworkPage(tk.Frame):
         # testbut.grid(row=0,column =0)
 
 
-class SerialStuff:
+class infogetter:
+    def __init__(self):
+        self.queue = queue
 
+class SerialStuff:
+    # https://mail.python.org/pipermail/tkinter-discuss/2013-August/003477.html
     def __init__(self):
 
         self.ser = serial.Serial()  # creates serial object
         self.grbl_version = "Grbl Not Detected"
         self.portList = []
+        self.Buffer = []
 
     def serial_ports(self):  # Finds open serial ports on Computer
         # print("find ports")
