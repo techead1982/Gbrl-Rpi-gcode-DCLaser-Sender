@@ -66,15 +66,15 @@ class GeneralPage(tk.Frame):
         self.grblstatus = ttk.Label(self.generalcontrollsframe, width=16, text="Connected")
         self.grblstatus.grid(row=0, column=1)
 
-        self.grblhome = ttk.Button(self.generalcontrollsframe, text="Home Laser", width=16)
+        self.grblhome = ttk.Button(self.generalcontrollsframe, text="Home Laser", width=32)
         self.grblhome.grid(row=1,column=0)
-        self.grblstop = ttk.Button(self.generalcontrollsframe, text="Stop Laser", width=16)
+        self.grblstop = ttk.Button(self.generalcontrollsframe, text="Stop Laser", width=32)
         self.grblstop.grid(row=1, column=1)
-        self.grblend = ttk.Button(self.generalcontrollsframe, text="End Program", width=16)
+        self.grblend = ttk.Button(self.generalcontrollsframe, text="End Program", width=32)
         self.grblend.grid(row=1, column=2)
-        self.grblhold = ttk.Button(self.generalcontrollsframe, text="Hold Laser", width=16)
+        self.grblhold = ttk.Button(self.generalcontrollsframe, text="Hold Laser", width=32)
         self.grblhold.grid(row=2, column=0)
-        self.grblstart = ttk.Button(self.generalcontrollsframe, text="Start Laser", width=16)
+        self.grblstart = ttk.Button(self.generalcontrollsframe, text="Start Laser", width=32)
         self.grblstart.grid(row=2, column=1)
         self.grblup = tk.Button(self.generalcontrollsframe, text="+Z", width=8, height=3)
         self.grblup.grid(row=4, column=0, columnspan=2)
@@ -84,8 +84,8 @@ class GeneralPage(tk.Frame):
         self.grblright.grid(row=5, column=1)
         self.grbldown = tk.Button(self.generalcontrollsframe, text="-Z", width=8, height=3)
         self.grbldown.grid(row=6, column=0, columnspan=2)
-        self.grblload = ttk.Button(self.generalcontrollsframe, text="Load Program", width=16)
-        self.grblload.grid(row=5, column=2, )
+        self.grblload = ttk.Button(self.generalcontrollsframe, text="Load Program", width=32)
+        self.grblload.grid(row=2, column=2, )
 
         self.generalgcodeframe = ttk.Frame(self)
         self.generalgcodeframe.grid(row=2, column=0, sticky="nsew")
@@ -116,16 +116,16 @@ class FileSYSPage(tk.Frame):
         self.generalnavframe = ttk.Frame(self)
         self.generalnavframe.grid(row=0, column=0, sticky="nsew")
 
-        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
+        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=3, command=lambda: controller.show_frame(GeneralPage))
         self.generalpagebutt.grid(row=0, column=0)
 
-        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=2, bg='gray', command=lambda: controller.show_frame(FileSYSPage))
+        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=3, bg='gray', command=lambda: controller.show_frame(FileSYSPage))
         self.filesyspagebutt.grid(row=0, column=1)
 
-        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
+        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=3, command=lambda: controller.show_frame(SerialPage))
         self.serialpagebutt.grid(row=0, column=2)
 
-        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
+        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=3, command=lambda: controller.show_frame(NetworkPage))
         self.networkpagebutt.grid(row=0, column=3)
 
         self.generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
@@ -171,16 +171,16 @@ class SerialPage(tk.Frame):
         self.generalnavframe = ttk.Frame(self)
         self.generalnavframe.grid(row=0, column=0, sticky="nsew")
 
-        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
+        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=3, command=lambda: controller.show_frame(GeneralPage))
         self.generalpagebutt.grid(row=0, column=0)
 
-        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
+        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=3, command=lambda: controller.show_frame(FileSYSPage))
         self.filesyspagebutt.grid(row=0, column=1)
 
-        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=2, bg='gray', command=lambda: controller.show_frame(SerialPage))
+        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=3, bg='gray', command=lambda: controller.show_frame(SerialPage))
         self.serialpagebutt.grid(row=0, column=2)
 
-        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=2, command=lambda: controller.show_frame(NetworkPage))
+        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=3, command=lambda: controller.show_frame(NetworkPage))
         self.networkpagebutt.grid(row=0, column=3)
 
         self.generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
@@ -288,16 +288,16 @@ class NetworkPage(tk.Frame):
         self.generalnavframe = ttk.Frame(self)
         self.generalnavframe.grid(row=0, column=0, sticky="nsew")
 
-        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=2, command=lambda: controller.show_frame(GeneralPage))
+        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=3, command=lambda: controller.show_frame(GeneralPage))
         self.generalpagebutt.grid(row=0, column=0)
 
-        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=2, command=lambda: controller.show_frame(FileSYSPage))
+        self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=3, command=lambda: controller.show_frame(FileSYSPage))
         self.filesyspagebutt.grid(row=0, column=1)
 
-        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=2, command=lambda: controller.show_frame(SerialPage))
+        self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=3, command=lambda: controller.show_frame(SerialPage))
         self.serialpagebutt.grid(row=0, column=2)
 
-        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=2, bg='gray', command=lambda: controller.show_frame(NetworkPage))
+        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=3, bg='gray', command=lambda: controller.show_frame(NetworkPage))
         self.networkpagebutt.grid(row=0, column=3)
 
         self.generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
