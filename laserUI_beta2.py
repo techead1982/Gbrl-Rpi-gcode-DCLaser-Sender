@@ -40,10 +40,10 @@ class GeneralPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        self.generalnavframe = ttk.Frame(self)
+        self.generalnavframe = ttk.Frame(self,)
         self.generalnavframe.grid(row=0, column=0, sticky="nsew")
 
-        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=3, bg='gray',command=lambda: controller.show_frame(GeneralPage))
+        self.generalpagebutt = tk.Button(self.generalnavframe, text="General", width=10, height=3, command=lambda: controller.show_frame(GeneralPage))
         self.generalpagebutt.grid(row=0, column=0)
 
         self.filesyspagebutt = tk.Button(self.generalnavframe, text="File System", width=10, height=3, command=lambda: controller.show_frame(FileSYSPage))
@@ -52,13 +52,13 @@ class GeneralPage(tk.Frame):
         self.serialpagebutt = tk.Button(self.generalnavframe, text="Serial", width=10, height=3, command=lambda: controller.show_frame(SerialPage))
         self.serialpagebutt.grid(row=0, column=2)
 
-        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=3, command=lambda: controller.show_frame(NetworkPage))
+        self.networkpagebutt = tk.Button(self.generalnavframe, text="Network", width=10, height=3,command=lambda: controller.show_frame(NetworkPage))
         self.networkpagebutt.grid(row=0, column=3)
 
         # main Frame with nav buttons //End
         # secondary frame with page controlls //Start
 
-        self.generalcontrollsframe = ttk.Frame(self)
+        self.generalcontrollsframe = tk.Frame(self,bg="snow2")
         self.generalcontrollsframe.grid(row=1, column=0, sticky="nsew")
 
         self.grbllbl = ttk.Label(self.generalcontrollsframe, text="Controller Status", width=16)

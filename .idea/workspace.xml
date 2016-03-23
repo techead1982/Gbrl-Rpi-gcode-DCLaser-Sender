@@ -69,6 +69,11 @@
       </map>
     </option>
   </component>
+  <component name="GithubProjectSettings">
+    <option name="CREATE_PULL_REQUEST_DEFAULT_BRANCH" value="master" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_USER" value="techead1982" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_NAME" value="Gbrl-Rpi-gcode-DCLaser-Sender" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -547,7 +552,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458689942091</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="drop old fiel and">
+      <created>1458691908701</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1458691908701</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
