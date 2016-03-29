@@ -6,6 +6,7 @@ import serial
 import queue
 import tkinter as tk
 from tkinter import ttk, StringVar, IntVar
+import Gbrl_Rpi_gcode_DcLaser_Sender
 
 
 class NobleLaser(tk.Tk):  # V0.0.1
@@ -39,6 +40,19 @@ class NobleLaser(tk.Tk):  # V0.0.1
 class GeneralPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+
+        self.fileName = ''
+
+        def getFileInfo(self):
+            global fileName
+            # print(gcodeSender.getFileInfo())
+            fileName = gcodeSender.getFileInfo()
+            print(fileName)
+            Uitext1.insert(INSERT, fileName)
+            # testbut = ttk.Button(GeneralControllsframe, text="1")
+            # testbut.grid(row=0, column=0)
+
+            # secondary frame with page controlls //End
 
         self.generalnavframe = ttk.Frame(self,)
         self.generalnavframe.grid(row=0, column=0, sticky="nsew")
@@ -84,7 +98,7 @@ class GeneralPage(tk.Frame):
         self.grblright.grid(row=5, column=1)
         self.grbldown = tk.Button(self.generalcontrollsframe, text="-Z", width=8, height=3)
         self.grbldown.grid(row=6, column=0, columnspan=2)
-        self.grblload = ttk.Button(self.generalcontrollsframe, text="Load Program", width=32)
+        self.grblload = ttk.Button(self.generalcontrollsframe, text="Load Program", command=getFileInfo, width=32)
         self.grblload.grid(row=2, column=2, )
 
         self.generalgcodeframe = ttk.Frame(self)
@@ -103,6 +117,13 @@ class GeneralPage(tk.Frame):
         self.grbltree.column('#4', minwidth=0, width=40)
         self.grbltree.pack(side='bottom', fill='both')
         self.grbltree.insert('', 0, '', values=(1, 'gcode cvbdfg cxfgdfg xfgdsg', 'sent', 'OK'))
+        fileName = ''
+        def getFileInfo(self):
+            global fileName
+            # print(gcodeSender.getFileInfo())
+            fileName = gcodeSender.getFileInfo()
+            print(fileName)
+            Uitext1.insert(INSERT, fileName)
         # testbut = ttk.Button(GeneralControllsframe, text="1")
         # testbut.grid(row=0, column=0)
 
