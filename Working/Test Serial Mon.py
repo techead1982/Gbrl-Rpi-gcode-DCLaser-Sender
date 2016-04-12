@@ -26,7 +26,7 @@ scrollbar.config(command=log.yview)
 #useful for parsing commands
 #Serial.readline seems unreliable at times too
 
-
+#line = ser.readline()
 v=StringVar()
 v.set("hi")
 
@@ -39,6 +39,7 @@ def sendBut():
     i = 0
     print(s)
     eatsh = s+"\n"
+    line = ser.readline().decode("ascii")
 
 
 b = Button(root, text="Send", command=sendBut)

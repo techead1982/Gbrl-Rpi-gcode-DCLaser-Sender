@@ -1,11 +1,20 @@
 import sys
-# import socket
 import glob
 import time
 import serial
 import queue
 import tkinter as tk
 from tkinter import ttk, StringVar, IntVar
+import threading
+import os
+import re
+
+#import rexx
+
+import threading
+#from Sender import *
+
+#import log
 
 
 class NobleLaser(tk.Tk):  # V0.0.1
@@ -463,6 +472,42 @@ class SerialStuff:
                 pass
             if i == 1:
                 break
+
+class Sender:
+                    def __init__(self):
+                        # Global variables
+                        self.history = []
+                        self._historyPos = None
+                        CNC.loadConfig(Utils.config)
+                        self.gcode = GCode()
+                        self.cnc = self.gcode.cnc
+
+                        self.log = Queue()  # Log queue returned from GRBL
+                        self.queue = Queue()  # Command queue to send to GRBL
+                        self.pendant = Queue()  # Command queue to be executed from Pendant
+                        self.serial = None
+                        self.thread = None
+                        self.controller = Utils.CONTROLLER["Grbl"]
+
+                        self._posUpdate = False  # Update position
+                        self._probeUpdate = False  # Update probe
+                        self._gUpdate = False  # Update $G
+                        self._update = None  # Generic update
+
+                        self.running = False
+                        self._runLines = 0
+                        self._stop = False  # Raise to stop current run
+                        self._quit = 0
+                        self._pause = False  # machine is on Hold
+                        self._alarm = True  # Display alarm message if true
+                        self._msg = None
+                        self._sumcline = 0
+                        self._lastFeed = 0
+                        self._newFeed = 0
+
+                    def sendGCode(self, cmd):
+                        if self.serial and not self.running:
+                        self.queue.put(cmd)
 
 
 # class NetworkShit:
