@@ -85,7 +85,7 @@ class GeneralPage(tk.Frame):
         self.grblhold.grid(row=2, column=0)
         self.grblstart = ttk.Button(self.generalcontrollsframe, text="Start Laser", width=32)
         self.grblstart.grid(row=2, column=1)
-        self.grblup = tk.Button(self.generalcontrollsframe, text="+Z", width=8, height=3)
+        self.grblup = tk.Button(self.generalcontrollsframe, text="+Z", width=8, height=3, command = Sender.moveXupYup(self))
         self.grblup.grid(row=4, column=0, columnspan=2)
         self.grblleft = tk.Button(self.generalcontrollsframe, text="-X", width=8, height=3)
         self.grblleft.grid(row=5, column=0)
@@ -139,7 +139,6 @@ class FileSYSPage(tk.Frame):
 
         self.generalcontrollsframe = ttk.Frame(self)  # secondary frame with page controlls
         self.generalcontrollsframe.grid(row=1, column=0, sticky="nsew")
-
         self.homedirlbl = ttk.Label(self.generalcontrollsframe, text="Home Dir", width=16)
         self.homedirlbl.grid(row=0, column=0)
         self.homedir = ttk.Entry(self.generalcontrollsframe, width=16)
@@ -353,9 +352,10 @@ class NetworkPage(tk.Frame):
         # testbut.grid(row=0,column =0)
 
 
-class infogetter:
-    def __init__(self):
-        self.queue = queue
+#class infogetter:
+    #def __init__(self):
+        #self.queue = queue
+
 
 class SerialStuff:
     # https://mail.python.org/pipermail/tkinter-discuss/2013-August/003477.html
@@ -474,40 +474,44 @@ class SerialStuff:
                 break
 
 class Sender:
-                    def __init__(self):
-                        # Global variables
-                        self.history = []
-                        self._historyPos = None
-                        CNC.loadConfig(Utils.config)
-                        self.gcode = GCode()
-                        self.cnc = self.gcode.cnc
+    def __init__(self):
+        # Global variables
+        self.history = []
+        self._historyPos = None
+        CNC.loadConfig(Utils.config)
+        self.gcode = GCode()
+        self.cnc = self.gcode.cnc
 
-                        self.log = Queue()  # Log queue returned from GRBL
-                        self.queue = Queue()  # Command queue to send to GRBL
-                        self.pendant = Queue()  # Command queue to be executed from Pendant
-                        self.serial = None
-                        self.thread = None
-                        self.controller = Utils.CONTROLLER["Grbl"]
+        self.log = Queue()  # Log queue returned from GRBL
+        self.queue = Queue()  # Command queue to send to GRBL
+        self.pendant = Queue()  # Command queue to be executed from Pendant
+        self.serial = None
+        self.thread = None
+        self.controller = Utils.CONTROLLER["Grbl"]
 
-                        self._posUpdate = False  # Update position
-                        self._probeUpdate = False  # Update probe
-                        self._gUpdate = False  # Update $G
-                        self._update = None  # Generic update
+        self._posUpdate = False  # Update position
+        self._probeUpdate = False  # Update probe
+        self._gUpdate = False  # Update $G
+        self._update = None  # Generic update
 
-                        self.running = False
-                        self._runLines = 0
-                        self._stop = False  # Raise to stop current run
-                        self._quit = 0
-                        self._pause = False  # machine is on Hold
-                        self._alarm = True  # Display alarm message if true
-                        self._msg = None
-                        self._sumcline = 0
-                        self._lastFeed = 0
-                        self._newFeed = 0
+        self.running = False
+        self._runLines = 0
+        self._stop = False  # Raise to stop current run
+        self._quit = 0
+        self._pause = False  # machine is on Hold
+        self._alarm = True  # Display alarm message if true
+        self._msg = None
+        self._sumcline = 0
+        self._lastFeed = 0
+        self._newFeed = 0
 
-                    def sendGCode(self, cmd):
-                        if self.serial and not self.running:
-                        self.queue.put(cmd)
+    def moveXupYup(self, event=None):
+        if event is not None and not self.acceptKey(): return
+        sendGCode("G91G0X%sY%s\nG90\n")
+    def sendGCode(self):
+        self.queue.put(Sender.moveXupYup)
+        #if self.serial and not self.running:
+
 
 
 # class NetworkShit:
@@ -520,7 +524,7 @@ class Sender:
 #
 #         return info
 #     def staticip(self, ip_address, subnet_mask, gateway, dns1, dns2):
-
+queue = queue.threading
 ser111 = SerialStuff()
 ser111.auto_setup(115200, None, None, None, 5)
 app = NobleLaser()
