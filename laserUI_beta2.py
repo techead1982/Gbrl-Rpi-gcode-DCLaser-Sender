@@ -19,10 +19,10 @@ import threading
 
 class NobleLaser(tk.Tk):  # V0.0.1
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, args: object, kwargs: object) -> object:
         ver = "V 0.0.1"
         tk.Tk.__init__(self, *args, **kwargs)
-        tk.Tk.wm_title(self, "Noble Laser " + ver + " --- " + ser111.grbl_version)
+        tk.Tk.wm_title(self, "Noble Laser  + ver +  --- " + ser111.grbl_version)
         tk.Tk.wm_geometry(self, "800x480+100+100")
         tk.Tk.wm_resizable(self, False, False)
         # tk.Tk.iconbitmap(self,default="some.ico")
@@ -85,7 +85,7 @@ class GeneralPage(tk.Frame):
         self.grblhold.grid(row=2, column=0)
         self.grblstart = ttk.Button(self.generalcontrollsframe, text="Start Laser", width=32)
         self.grblstart.grid(row=2, column=1)
-        self.grblup = tk.Button(self.generalcontrollsframe, text="+Z", width=8, height=3, command = Sender.moveXupYup(self))
+        self.grblup = tk.Button(self.generalcontrollsframe, text="+Z", width=8, height=3)
         self.grblup.grid(row=4, column=0, columnspan=2)
         self.grblleft = tk.Button(self.generalcontrollsframe, text="-X", width=8, height=3)
         self.grblleft.grid(row=5, column=0)
@@ -94,7 +94,13 @@ class GeneralPage(tk.Frame):
         self.grbldown = tk.Button(self.generalcontrollsframe, text="-Z", width=8, height=3)
         self.grbldown.grid(row=6, column=0, columnspan=2)
         self.grblload = ttk.Button(self.generalcontrollsframe, text="Load Program", width=32)
-        self.grblload.grid(row=2, column=2, )
+        self.grblload.grid(row=2, column=2)
+        self.grbl10= ttk.Button(self.generalcontrollsframe, text="1.0", width=10, )
+        self.grbl10.grid(row=4,column=2)
+        self.grbl010 = ttk.Button(self.generalcontrollsframe, text="0.1", width=10, )
+        self.grbl010.grid(row=5, column=2)
+        self.grbl001 = ttk.Button(self.generalcontrollsframe, text=".01", width=10, )
+        self.grbl001.grid(row=6, column=2)
 
         self.generalgcodeframe = ttk.Frame(self)
         self.generalgcodeframe.grid(row=2, column=0, sticky="nsew")
@@ -473,44 +479,7 @@ class SerialStuff:
             if i == 1:
                 break
 
-class Sender:
-    def __init__(self):
-        # Global variables
-        self.history = []
-        self._historyPos = None
-        CNC.loadConfig(Utils.config)
-        self.gcode = GCode()
-        self.cnc = self.gcode.cnc
 
-        self.log = Queue()  # Log queue returned from GRBL
-        self.queue = Queue()  # Command queue to send to GRBL
-        self.pendant = Queue()  # Command queue to be executed from Pendant
-        self.serial = None
-        self.thread = None
-        self.controller = Utils.CONTROLLER["Grbl"]
-
-        self._posUpdate = False  # Update position
-        self._probeUpdate = False  # Update probe
-        self._gUpdate = False  # Update $G
-        self._update = None  # Generic update
-
-        self.running = False
-        self._runLines = 0
-        self._stop = False  # Raise to stop current run
-        self._quit = 0
-        self._pause = False  # machine is on Hold
-        self._alarm = True  # Display alarm message if true
-        self._msg = None
-        self._sumcline = 0
-        self._lastFeed = 0
-        self._newFeed = 0
-
-    def moveXupYup(self, event=None):
-        if event is not None and not self.acceptKey(): return
-        sendGCode("G91G0X%sY%s\nG90\n")
-    def sendGCode(self):
-        self.queue.put(Sender.moveXupYup)
-        #if self.serial and not self.running:
 
 
 
