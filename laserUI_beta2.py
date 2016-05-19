@@ -16,10 +16,11 @@ import threading
 
 #import log
 
+# if __name__ == "__main__":
 
 class NobleLaser(tk.Tk):  # V0.0.1
 
-    def __init__(self, args: object, kwargs: object) -> object:
+    def __init__(self, *args, **kwargs):
         ver = "V 0.0.1"
         tk.Tk.__init__(self, *args, **kwargs)
         tk.Tk.wm_title(self, "Noble Laser  + ver +  --- " + ser111.grbl_version)
