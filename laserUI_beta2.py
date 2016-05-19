@@ -100,7 +100,7 @@ class GeneralPage(tk.Frame):
         self.grbl10.grid(row=4,column=2)
         self.grbl010 = ttk.Button(self.generalcontrollsframe, text="0.1", width=10, )
         self.grbl010.grid(row=5, column=2)
-        self.grbl001 = ttk.Button(self.generalcontrollsframe, text=".01", width=10, )
+        self.grbl001 = ttk.Button(self.generalcontrollsframe, text=".001", width=10, )
         self.grbl001.grid(row=6, column=2)
 
         self.generalgcodeframe = ttk.Frame(self)
