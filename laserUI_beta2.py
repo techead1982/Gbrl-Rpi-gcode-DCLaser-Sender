@@ -96,12 +96,18 @@ class GeneralPage(tk.Frame):
         self.grbldown.grid(row=6, column=0, columnspan=2)
         self.grblload = ttk.Button(self.generalcontrollsframe, text="Load Program", width=32)
         self.grblload.grid(row=2, column=2)
-        self.grbl10= ttk.Button(self.generalcontrollsframe, text="1.0", width=10, )
+
+        self.gbrlvar = IntVar()
+        self.gbrlvar.set(3)
+
+        self.grbl10= ttk.Radiobutton(self.generalcontrollsframe, text="1.0", width=10, variable=self.gbrlvar, value=1)
         self.grbl10.grid(row=4,column=2)
-        self.grbl010 = ttk.Button(self.generalcontrollsframe, text="0.1", width=10, )
+        self.grbl010 = ttk.Radiobutton(self.generalcontrollsframe, text="0.1", width=10, variable=self.gbrlvar, value=2)
         self.grbl010.grid(row=5, column=2)
-        self.grbl001 = ttk.Button(self.generalcontrollsframe, text=".001", width=10, )
+        self.grbl001 = ttk.Radiobutton(self.generalcontrollsframe, text=".001", width=10, variable=self.gbrlvar, value=3)
         self.grbl001.grid(row=6, column=2)
+
+
 
         self.generalgcodeframe = ttk.Frame(self)
         self.generalgcodeframe.grid(row=2, column=0, sticky="nsew")
