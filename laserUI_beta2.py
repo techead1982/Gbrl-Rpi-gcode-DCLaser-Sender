@@ -5,6 +5,8 @@ import serial
 import queue
 import tkinter as tk
 from tkinter import ttk, StringVar, IntVar
+from tkinter.filedialog import *
+import Gbrl_Rpi_gcode_DcLaser_Sender
 import threading
 import os
 import re
@@ -34,7 +36,7 @@ class NobleLaser(tk.Tk):  # V0.0.1
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-
+        self.fileName = ''
         for F in (GeneralPage, FileSYSPage, SerialPage, NetworkPage):
             frame = F(container, self)
             self.frames[F] = frame
@@ -45,6 +47,18 @@ class NobleLaser(tk.Tk):  # V0.0.1
         frame = self.frames[cont]
         frame.tkraise()
 
+    def getFile(self):
+        # print(gcodeSender.getFileInfo())
+
+        self.fileName = askopenfilename(filetypes=(("G-code", ".gcode"), ("NC", ".nc"), ("All", "*.*")))
+        print(self.fileName)
+        # Uitext1.insert(INSERT, self.fileName)
+
+    # def sendFile():
+        # gcodeSender.setSerial('COM3',115200,1)
+        # gcodeSender.streamFile(fileName, Uitext1, 'COM5', 115200)
+
+        # self.gcodeSender = Gbrl_Rpi_gcode_DcLaser_Sender.LaserCom()
 
 class GeneralPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -94,8 +108,19 @@ class GeneralPage(tk.Frame):
         self.grblright.grid(row=5, column=1)
         self.grbldown = tk.Button(self.generalcontrollsframe, text="-Z", width=8, height=3)
         self.grbldown.grid(row=6, column=0, columnspan=2)
-        self.grblload = ttk.Button(self.generalcontrollsframe, text="Load Program", width=32)
+
+
+
+
+
+        self.gbrlvar = IntVar()
+        self.gbrlvar.set(3)
+
+        self.grblload = ttk.Button(self.generalcontrollsframe, command= lambda: NobleLaser.getFile(self), text="Load Program", width=32)
         self.grblload.grid(row=2, column=2)
+
+
+
 
         self.gbrlvar = IntVar()
         self.gbrlvar.set(3)
