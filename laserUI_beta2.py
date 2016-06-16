@@ -10,6 +10,7 @@ import Gbrl_Rpi_gcode_DcLaser_Sender
 import threading
 import os
 import re
+from SerialClass import *
 
 #import rexx
 
@@ -30,6 +31,11 @@ class NobleLaser(tk.Tk):  # V0.0.1
         tk.Tk.wm_resizable(self, False, False)
         # tk.Tk.iconbitmap(self,default="some.ico")
 
+        self.cq = ""
+        self.rq = ""
+        self.wq = ""
+
+        # SerialClass(write_queue=self.wq, command_queue=self.cq, reply_queue=self.rq)
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
@@ -54,13 +60,17 @@ class NobleLaser(tk.Tk):  # V0.0.1
         print(self.fileName)
         # Uitext1.insert(INSERT, self.fileName)
 
-    # def sendFile():
-        # gcodeSender.setSerial('COM3',115200,1)
-        # gcodeSender.streamFile(fileName, Uitext1, 'COM5', 115200)
+     #def sendFile():
+         #gcodeSender.setSerial('COM3',115200,1)
+         #gcodeSender.streamFile(fileName, Uitext1, 'COM5', 115200)
 
         # self.gcodeSender = Gbrl_Rpi_gcode_DcLaser_Sender.LaserCom()
 
 class GeneralPage(tk.Frame):
+    def jog_left(self):
+
+        print("left: "+self.gbrlvar)
+
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
@@ -102,7 +112,7 @@ class GeneralPage(tk.Frame):
         self.grblstart.grid(row=2, column=1)
         self.grblup = tk.Button(self.generalcontrollsframe, text="+Z", width=8, height=3)
         self.grblup.grid(row=4, column=0, columnspan=2)
-        self.grblleft = tk.Button(self.generalcontrollsframe, text="-X", width=8, height=3)
+        self.grblleft = tk.Button(self.generalcontrollsframe, text="-X", width=8, height=3, command= lambda: GeneralPage.jog_left(self))
         self.grblleft.grid(row=5, column=0)
         self.grblright = tk.Button(self.generalcontrollsframe, text="+X", width=8, height=3)
         self.grblright.grid(row=5, column=1)
@@ -113,8 +123,7 @@ class GeneralPage(tk.Frame):
 
 
 
-        self.gbrlvar = IntVar()
-        self.gbrlvar.set(3)
+
 
         self.grblload = ttk.Button(self.generalcontrollsframe, command= lambda: NobleLaser.getFile(self), text="Load Program", width=32)
         self.grblload.grid(row=2, column=2)
