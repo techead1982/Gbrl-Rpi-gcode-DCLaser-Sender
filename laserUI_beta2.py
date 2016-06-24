@@ -10,7 +10,7 @@ import Gbrl_Rpi_gcode_DcLaser_Sender
 import threading
 import os
 import re
-from SerialClass import *
+from SerialClass1 import SerialClass
 
 #import rexx
 
@@ -19,23 +19,27 @@ import threading
 
 #import log
 
-# if __name__ == "__main__":
+
+cq = queue.Queue(maxsize=0)
+rq = queue.Queue(maxsize=0)
+wq = queue.Queue(maxsize=0)
 
 class NobleLaser(tk.Tk):  # V0.0.1
 
     def __init__(self, *args, **kwargs):
         ver = "V 0.0.1"
         tk.Tk.__init__(self, *args, **kwargs)
-        tk.Tk.wm_title(self, "Noble Laser  + ver +  --- " + ser111.grbl_version)
+        tk.Tk.wm_title(self, "Noble Laser  + ver +  --- ")
         tk.Tk.wm_geometry(self, "800x480+100+100")
         tk.Tk.wm_resizable(self, False, False)
         # tk.Tk.iconbitmap(self,default="some.ico")
 
-        self.cq = ""
-        self.rq = ""
-        self.wq = ""
+        #self.cq = queue.Queue
+        #self.rq = queue.Queue
+        #self.wq = queue.Queue
 
-        # SerialClass(write_queue=self.wq, command_queue=self.cq, reply_queue=self.rq)
+        sc = SerialStuff(wq_q=wq, cq_q=cq, rq_q=rq)
+        sc.start()
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
         container.grid_rowconfigure(0, weight=1)
@@ -53,6 +57,8 @@ class NobleLaser(tk.Tk):  # V0.0.1
         frame = self.frames[cont]
         frame.tkraise()
 
+
+
     def getFile(self):
         # print(gcodeSender.getFileInfo())
 
@@ -69,7 +75,15 @@ class NobleLaser(tk.Tk):  # V0.0.1
 class GeneralPage(tk.Frame):
     def jog_left(self):
 
-        print("left: "+self.gbrlvar)
+        cq.put("Left,"+"G0\n")
+
+        #val = rq.get(self)
+        #print("left: " + val)
+
+        #print("done")
+    # def Send_prog
+
+
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -140,9 +154,12 @@ class GeneralPage(tk.Frame):
         self.grbl010.grid(row=5, column=2)
         self.grbl001 = ttk.Radiobutton(self.generalcontrollsframe, text=".001", width=10, variable=self.gbrlvar, value=3)
         self.grbl001.grid(row=6, column=2)
-
-
-
+        self.topdoor = ttk.Label(self.generalcontrollsframe, text="Top Door", width =40, relief=SOLID, )
+        self.topdoor.grid(row=4, column=3)
+        self.topbot = ttk.Label(self.generalcontrollsframe, text="Bottom Door", width =40, relief=SOLID, )
+        self.topbot.grid(row=5, column=3)
+        self.sidedoor = ttk.Label(self.generalcontrollsframe, text="sidedoor", width =40, relief=SOLID, )
+        self.sidedoor.grid(row=6, column=3)
         self.generalgcodeframe = ttk.Frame(self)
         self.generalgcodeframe.grid(row=2, column=0, sticky="nsew")
 
@@ -244,31 +261,31 @@ class SerialPage(tk.Frame):
         self.portlbl = ttk.Label(self.generalcontrollsframe, text="Port", width=16)
         self.portlbl.grid(row=0, column=0)
         self.portcb_val = StringVar()
-        self.portcb_val = ser111.ser.port
+        self.portcb_val = "" #ser111.ser.port
         self.portcb = ttk.Combobox(self.generalcontrollsframe, textvariable=self.portcb_val, state='readonly')
         i = 0
-        for port in ser111.portList:
-            if port == ser111.ser.port:
-                break
-            else:
-                i += 1
+        #for port in ser111.portList:
+        #    if port == ser111.ser.port:
+        #        break
+        #    else:
+        #        i += 1
 
-        self.portcb.config(values=ser111.portList)
-        self.portcb.current(i)
-        self.portcb.grid(row=0, column=1)
+        #self.portcb.config(values=ser111.portList)
+        #self.portcb.current(i)
+        #self.portcb.grid(row=0, column=1)
 
         self.baudratelbl = ttk.Label(self.generalcontrollsframe, text="Baudrate", width=16)
         self.baudratelbl.grid(row=2, column=0)
         self.baudrate_val = StringVar()
-        self.baudrate_val = ser111.ser.baudrate
+        #self.baudrate_val = ser111.ser.baudrate
         baudratelist = ['9600', '19200', '38400', '57600', '115200']
         self.baudrate = ttk.Combobox(self.generalcontrollsframe, textvariable=self.baudrate_val, state='readonly')
         i = 0
-        for brate in baudratelist:
-            if brate == str(ser111.ser.baudrate):
-                break
-            else:
-                i += 1
+        #for brate in baudratelist:
+        #    if brate == str(ser111.ser.baudrate):
+        #        break
+        #    else:
+        #        i += 1
 
         self.baudrate.config(values=baudratelist)
         self.baudrate.current(i)
@@ -277,15 +294,15 @@ class SerialPage(tk.Frame):
         self.databitslbl = ttk.Label(self.generalcontrollsframe, text="Data Bits", width=16)
         self.databitslbl.grid(row=3, column=0)
         self.databits_val = StringVar()
-        self.databits_val = ser111.ser.bytesize
+        #self.databits_val = ser111.ser.bytesize
         databitslist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
         self.databits = ttk.Combobox(self.generalcontrollsframe, textvariable=self.databits_val, state='readonly')
         i = 0
-        for dbits in databitslist:
-            if dbits == str(ser111.ser.bytesize):
-                break
-            else:
-                i += 1
+        #for dbits in databitslist:
+        #    if dbits == str(ser111.ser.bytesize):
+        #        break
+        #    else:
+        #        i += 1
 
         self.databits.config(values=databitslist)
         self.databits.current(i)
@@ -294,15 +311,15 @@ class SerialPage(tk.Frame):
         self.paritybitslbl = ttk.Label(self.generalcontrollsframe, text="Paritybits", width=16)
         self.paritybitslbl.grid(row=4, column=0)
         self.paritybits_val = StringVar()
-        self.paritybits_val = ser111.ser.parity
+        #self.paritybits_val = ser111.ser.parity
         paritybitslist = ['N', 'O', 'E', 'M', 'S']
         self.paritybits = ttk.Combobox(self.generalcontrollsframe, textvariable=self.paritybits_val, state='readonly')
         i = 0
-        for pbits in paritybitslist:
-            if pbits == ser111.ser.parity:
-                break
-            else:
-                i += 1
+        #for pbits in paritybitslist:
+        #    if pbits == ser111.ser.parity:
+        #        break
+        #    else:
+        #        i += 1
 
         self.paritybits.config(values=paritybitslist)
         self.paritybits.current(i)
@@ -311,15 +328,15 @@ class SerialPage(tk.Frame):
         self.stopbitslbl = ttk.Label(self.generalcontrollsframe, text="Stopbits", width=16)
         self.stopbitslbl.grid(row=5, column=0)
         self.stopbits_val = StringVar()
-        self.stopbits_val = ser111.ser.stopbits
+        #self.stopbits_val = ser111.ser.stopbits
         stopbitslist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
         self.stopbits = ttk.Combobox(self.generalcontrollsframe, textvariable=self.stopbits_val, state='readonly')
         i = 0
-        for sbits in stopbitslist:
-            if sbits == str(ser111.ser.stopbits):
-                break
-            else:
-                i += 1
+        #for sbits in stopbitslist:
+        #    if sbits == str(ser111.ser.stopbits):
+        #        break
+        #    else:
+        #        i += 1
 
         self.stopbits.config(values=stopbitslist)
         self.stopbits.current(i)
@@ -332,8 +349,8 @@ class SerialPage(tk.Frame):
         # testbut = ttk.Button(GeneralControllsframe,text="3")
         # testbut.grid(row=0,column =0)
     def update_info(self):
-        self.portcb_val = ser111.ser.port
-        print(ser111.ser.port)
+        #self.portcb_val = ser111.ser.port
+        print("ser111.ser.port:)")
 
 
 class NetworkPage(tk.Frame):
@@ -404,14 +421,82 @@ class NetworkPage(tk.Frame):
         #self.queue = queue
 
 
-class SerialStuff:
+class SerialStuff(threading.Thread):
     # https://mail.python.org/pipermail/tkinter-discuss/2013-August/003477.html
-    def __init__(self):
+    def __init__(self, cq_q, wq_q, rq_q):
 
         self.ser = serial.Serial()  # creates serial object
         self.grbl_version = "Grbl Not Detected"
         self.portList = []
         self.Buffer = []
+        self.write_q = wq_q
+        self.cammand_q = cq_q
+        self.reply_q = rq_q
+        self.auto_setup(115200,None,None,None,None)
+        threading.Thread.__init__(self)
+
+
+    def run(self):
+        self.reply_q.put("GV,"+self.grbl_version)
+        print(self.grbl_version+":1")
+        #print("hi" + self.reply_q.get(self))
+        self.ser.open()
+        while self.ser.is_open:
+            if self.cammand_q.qsize() != 0:
+                print("ser cq1")
+                textout = self.cammand_q.get()
+                textsplit = []
+                textsplit = textout.split(",")
+
+                if textsplit[0] == 'Quit':
+                    self.ser.close()
+                    print("ser cq1 Quit")
+                elif textsplit[0] == 'Pause':
+                    self.ser.write(bytearray(textsplit[1], 'ascii'))
+                    print("ser cq1 Pause")
+                elif textsplit[0] == 'Left':
+                    self.ser.write(bytearray(textsplit[1], 'ascii'))
+                    print("ser cq1 Left")
+                elif textsplit[0] == 'Right':
+                    self.ser.write(bytearray(textsplit[1], 'ascii'))
+                    print("ser cq1 Right")
+                elif textsplit[0] == 'Up':
+                    self.ser.write(bytearray(textsplit[1], 'ascii'))
+                    print("ser cq1 Up")
+                elif textsplit[0] == 'Down':
+                    self.ser.write(bytearray(textsplit[1], 'ascii'))
+                    print("ser cq1 Down")
+                print("ser cq1 writen")
+                time.sleep(0.1)
+                self.cammand_q.task_done()
+                print("ser cq1 done")
+            while self.write_q.qsize() != 0:
+                if self.cammand_q.qsize() != 0:
+                    print("ser cq2")
+                    # switch{}
+                        # case up;
+                            # write (gcode+[2])
+                        # case down;
+
+                    textout = self.cammand_q.get()
+                    self.ser.write(bytearray(textout, 'ascii'))
+                    time.sleep(0.1)
+                    self.cammand_q.task_done()
+
+
+                else:
+                    print("ser wq")
+                    textout = self.write_q.get()
+                    self.ser.write(bytearray(textout, 'ascii'))
+                    time.sleep(0.1)
+
+                    self.write_q.task_done()
+            time.sleep(1)
+            print("Still Alive...")
+        print("Still Aliveeeeeeeeeeeeeeeee...Cake is a lieeeeee")
+
+
+
 
     def serial_ports(self):  # Finds open serial ports on Computer
         # print("find ports")
@@ -445,6 +530,10 @@ class SerialStuff:
 
     def grbl_info(self, ver):  # Sets ver Num
         self.grbl_version = ver
+        slef.send = ""
+        self.send = "GV,"+self.grbl_version
+        self.reply_q.put_nowait(self.send)
+
 
     def auto_setup(self, baud_rate, byte_size, parity_bits, stop_bits, time_out):  # used in auto find grbl
 
@@ -504,11 +593,11 @@ class SerialStuff:
                     data = self.ser.readline().strip().decode('ascii')
                     # print(data)
                     if data.find('Grbl') < 0:
-                        # print("No data")
+                        print("No data")
                         u = 1
                     else:
                         self.grbl_version = data
-                        # print(data)
+                        print(data)
                         i = 1
                         p = port
                         break
@@ -534,9 +623,9 @@ class SerialStuff:
 #
 #         return info
 #     def staticip(self, ip_address, subnet_mask, gateway, dns1, dns2):
-queue = queue.threading
-ser111 = SerialStuff()
-ser111.auto_setup(115200, None, None, None, 5)
+#queue = queue.threading
+#ser111 = SerialStuff()
+#ser111.auto_setup(115200, None, None, None, 5)
 app = NobleLaser()
 
 app.mainloop()
