@@ -6,6 +6,7 @@ import queue
 import tkinter as tk
 from tkinter import ttk, StringVar, IntVar
 from tkinter.filedialog import *
+import re
 import Gbrl_Rpi_gcode_DcLaser_Sender
 import threading
 import os
@@ -75,7 +76,93 @@ class NobleLaser(tk.Tk):  # V0.0.1
 class GeneralPage(tk.Frame):
     def jog_left(self):
 
-        cq.put("Left,"+"G0\n")
+        wq.put("G90")
+        wq.put("G21")
+        wq.put("G0 X7.8964 Y0.9092")
+        wq.put("M03")
+        wq.put("G1F1.000000")
+        wq.put("G02 X8.0219 Y0.6399 I-3.4214 J-1.758")
+        # wq.put("G02 X8.0745 Y0.4848 I-1.0793 J-0.453")
+        wq.put("G02 X8.0787 Y0.3367 I-0.3156 J-0.083")
+        wq.put("G01 X8.0253 Y0.2424")
+        wq.put("G01 X7.9234 Y0.1832")
+        wq.put("G02 X7.6956 Y0.1362 I-0.3323 J1.0341")
+        wq.put("G02 X7.4563 Y0.1206 I-0.3685 J3.8189")
+        wq.put("G02 X7.0323 Y0.1135 I-0.424 J12.5812")
+        wq.put("G02 X6.6758 Y0.1184 I-0. J12.8671")
+        wq.put("G02 X6.4714 Y0.1289 I0.1219 J4.3999")
+        wq.put("G02 X6.2683 Y0.1519 I0.1961 J2.6372")
+        wq.put("G02 X6.149 Y0.1781 I0.1423 J0.9319")
+        wq.put("G02 X6.0389 Y0.2239 I0.1469 J0.5085")
+        wq.put("G01 X5.9785 Y0.2728")
+        wq.put("G02 X5.9315 Y0.3372 I0.331 J0.2911")
+        wq.put("G02 X5.8874 Y0.4244 I0.5874 J0.3521")
+        wq.put("G1  X4.0453 Y3.9646")
+        wq.put("G1  X2.2105 Y0.4244")
+        wq.put("G02 X2.1601 Y0.3363 I-0.8101 J0.4051")
+        wq.put("G02 X2.112 Y0.2728 I-0.4616 J0.2996")
+        wq.put("G01 X2.0517 Y0.2241")
+        wq.put("G02 X1.9412 Y0.1781 I-0.2575 J0.4629")
+        wq.put("G02 X1.8221 Y0.152 I-0.2585 J0.8948")
+        wq.put("G02 X1.6153 Y0.1289 I-0.4019 J2.6554")
+        wq.put("G02 X1.4068 Y0.1183 I-0.3414 J4.6855")
+        wq.put("G02 X1.0656 Y0.1135 I-0.3412 J12.0613")
+        wq.put("G02 X0.6716 Y0.1207 I-0. J10.7588")
+        wq.put("G02 X0.4554 Y0.1362 I0.1138 J3.1054")
+        wq.put("G02 X0.2516 Y0.1833 I0.092 J0.8618")
+        wq.put("G01 X0.1637 Y0.2424")
+        wq.put("G01 X0.1216 Y0.3337")
+        wq.put("G02 X0.1334 Y0.4848 I0.3745 J0.0469")
+        wq.put("G02 X0.1897 Y0.6396 I1.1308 J-0.3236")
+        wq.put("G02 X0.3227 Y0.9092 I3.4807 J-1.5499")
+        wq.put("G1  X2.673 Y5.1927")
+        wq.put("G1  X0.49 Y9.2181")
+        wq.put("G02 X0.362 Y9.4945 I4.4076 J2.208")
+        wq.put("G02 X0.3042 Y9.654 I1.4314 J0.6096")
+        wq.put("G02 X0.2934 Y9.8065 I0.3259 J0.0996")
+        wq.put("G01 X0.3419 Y9.8968")
+        wq.put("G01 X0.4393 Y9.9525")
+        wq.put("G02 X0.6643 Y9.9956 I0.3127 J-1.0221")
+        wq.put("G02 X0.8993 Y10.0082 I0.3747 J-4.7962")
+        wq.put("G02 X1.3314 Y10.0145 I0.4321 J-14.8749")
+        wq.put("G02 X1.6875 Y10.0096 I-0. J-13.0917")
+        wq.put("G02 X1.8962 Y9.9995 I-0.1321 J-4.8538")
+        wq.put("G02 X2.1034 Y9.9763 I-0.1956 J-2.6838")
+        wq.put("G02 X2.2259 Y9.9499 I-0.1513 J-0.9992")
+        wq.put("G02 X2.3388 Y9.9035 I-0.1434 J-0.5097")
+        wq.put("G01 X2.3967 Y9.8552")
+        wq.put("G02 X2.4419 Y9.7919 I-0.5033 J-0.4079")
+        wq.put("G02 X2.4913 Y9.7036 I-0.8419 J-0.5288")
+        wq.put("G1  X4.2122 Y6.4588")
+        wq.put("G1  X5.8874 Y9.7036")
+        wq.put("G02 X5.9371 Y9.7922 I0.9424 J-0.4712")
+        wq.put("G02 X5.9824 Y9.8552 I0.5254 J-0.3295")
+        wq.put("G01 X6.0391 Y9.9044")
+        wq.put("G02 X6.1416 Y9.9499 I0.2446 J-0.4136")
+        wq.put("G02 X6.2531 Y9.9762 I0.2477 J-0.8004")
+        wq.put("G02 X6.4448 Y9.9995 I0.3699 J-2.2441")
+        wq.put("G02 X6.6383 Y10.0096 I0.3121 J-4.1125")
+        wq.put("G02 X6.9792 Y10.0145 I0.3409 J-11.8539")
+        wq.put("G02 X7.358 Y10.0085 I-0. J-12.0306")
+        wq.put("G02 X7.5782 Y9.9956 I-0.1286 J-4.0819")
+        wq.put("G02 X7.7864 Y9.952 I-0.0788 J-0.8949")
+        wq.put("G01 X7.8814 Y9.8933")
+        wq.put("G01 X7.9294 Y9.8003")
+        wq.put("G02 X7.923 Y9.6509 I-0.3508 J-0.0596")
+        wq.put("G02 X7.8719 Y9.4949 I-1.3523 J0.3559")
+        wq.put("G02 X7.7525 Y9.2188 I-4.1724 J1.6413")
+        wq.put("G1  X5.5692 Y5.2161")
+        wq.put("G1  X7.8964 Y0.9092")
+        wq.put("G1  X7.8964 Y0.9092")
+        wq.put("M05")
+        wq.put("G0 X0.000 Y0.000")
+        wq.put("M05")
+        wq.put("M02")
+
+
+
+
+
 
         #val = rq.get(self)
         #print("left: " + val)
@@ -432,6 +519,11 @@ class SerialStuff(threading.Thread):
         self.write_q = wq_q
         self.cammand_q = cq_q
         self.reply_q = rq_q
+        self.charline = []
+        self.linecount = 1
+        self.okcount = 0
+        self.grblBufferSize = 128
+        self.gcodeCount = 0
         self.auto_setup(115200,None,None,None,None)
         threading.Thread.__init__(self)
 
@@ -441,6 +533,7 @@ class SerialStuff(threading.Thread):
         print(self.grbl_version+":1")
         #print("hi" + self.reply_q.get(self))
         self.ser.open()
+
         while self.ser.is_open:
             if self.cammand_q.qsize() != 0:
                 print("ser cq1")
@@ -486,9 +579,54 @@ class SerialStuff(threading.Thread):
 
                 else:
                     print("ser wq")
-                    textout = self.write_q.get()
-                    self.ser.write(bytearray(textout, 'ascii'))
-                    time.sleep(0.1)
+                    counter = 0
+                    while self.gcodeCount != self.linecount:
+                        textout = self.write_q.get()
+
+                        lineblock = textout.strip()
+                        # lineblock += "\n"
+                        self.charline.append(len(lineblock) + 1)
+                        grblOut = ''
+                        verbose = True
+                        okc = 0
+                        while sum(self.charline) >= self.grblBufferSize - 1 | self.ser.inWaiting():
+
+                            out_temp = self.ser.readline().strip().decode('ascii')
+                            #print("i Work For now L39"+out_temp.decode("utf-8"))
+                            if out_temp.find('ok') < 0 and out_temp.find('error') < 0:
+                                self.reply_q.put("Error," + out_temp)
+                                print("Debug: Error," + out_temp)
+                                okc += 2
+                            else:
+
+                                s=[]
+                                okc += sum(1 for _ in re.finditer(r'\b%s\b' % re.escape('ok'), out_temp))
+                                print("okc = " + str(okc))
+                                grblOut += out_temp
+                                #self.gcodeCount += 1
+                                #grblOut += str(self.gcodeCount)
+                                #self.okcount += 1 + okc
+                                del self.charline[0]
+
+                                #print("L73")
+                        self.gcodeCount += 1 + okc - 1
+                        grblOut += str(self.gcodeCount)
+                        if verbose:
+                            # textBox.insert('1.0',"SND: " + str(lineCount) + " : " + lineBlock +'\n')
+                            print("SND: " + str(self.linecount) + " : " + lineblock)
+                            # newl = b'\n'
+                            self.ser.write(bytearray(lineblock + '\n', 'ascii'))  # Send g-code block to grbl
+                            # time.sleep(.1)
+
+                        if verbose:
+                            # textBox.insert('1.0', "BUF:", str(sum(self.charline)), "REC:", grblOut+'\n')
+                            print("BUF: " + str(sum(self.charline)) + "  REC: " + grblOut + " Gcode Oks: " + str(self.gcodeCount))
+                        self.linecount += 1
+
+
+                    # self.ser.write(bytearray(textout, 'ascii'))
+                    # time.sleep(0.1)
+
 
                     self.write_q.task_done()
             time.sleep(1)
